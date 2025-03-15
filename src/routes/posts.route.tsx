@@ -1,16 +1,16 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
-import { fetchPosts } from '../utils/posts'
+import { Link, Outlet, createFileRoute } from '@tanstack/react-router';
+import { fetchPosts } from '../utils/posts';
 
 export const Route = createFileRoute('/posts')({
   loader: async () => fetchPosts(),
   component: PostsLayoutComponent,
-})
+});
 
 function PostsLayoutComponent() {
-  const posts = Route.useLoaderData()
+  const posts = Route.useLoaderData();
 
   return (
-    <div className="p-2 flex gap-2">
+    <div className="flex gap-2 p-2">
       <ul className="list-disc pl-4">
         {[...posts, { id: 'i-do-not-exist', title: 'Non-existent Post' }].map(
           (post) => {
@@ -27,12 +27,12 @@ function PostsLayoutComponent() {
                   <div>{post.title.substring(0, 20)}</div>
                 </Link>
               </li>
-            )
-          },
+            );
+          }
         )}
       </ul>
       <hr />
       <Outlet />
     </div>
-  )
+  );
 }

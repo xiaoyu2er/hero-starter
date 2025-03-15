@@ -1,7 +1,7 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
-import axios from 'redaxios'
-import { DEPLOY_URL } from '../utils/users'
-import type { User } from '../utils/users'
+import { Link, Outlet, createFileRoute } from '@tanstack/react-router';
+import axios from 'redaxios';
+import { DEPLOY_URL } from '../utils/users';
+import type { User } from '../utils/users';
 
 export const Route = createFileRoute('/users')({
   loader: async () => {
@@ -9,17 +9,17 @@ export const Route = createFileRoute('/users')({
       .get<Array<User>>(DEPLOY_URL + '/api/users')
       .then((r) => r.data)
       .catch(() => {
-        throw new Error('Failed to fetch users')
-      })
+        throw new Error('Failed to fetch users');
+      });
   },
   component: UsersLayoutComponent,
-})
+});
 
 function UsersLayoutComponent() {
-  const users = Route.useLoaderData()
+  const users = Route.useLoaderData();
 
   return (
-    <div className="p-2 flex gap-2">
+    <div className="flex gap-2 p-2">
       <ul className="list-disc pl-4">
         {[
           ...users,
@@ -38,11 +38,11 @@ function UsersLayoutComponent() {
                 <div>{user.name}</div>
               </Link>
             </li>
-          )
+          );
         })}
       </ul>
       <hr />
       <Outlet />
     </div>
-  )
+  );
 }
