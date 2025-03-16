@@ -4,6 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "postinstall": "npx prisma generate",
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
