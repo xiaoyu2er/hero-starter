@@ -94,7 +94,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <RootProviders>
-          <div className="flex h-screen w-screen items-start justify-center">
+          <div className="flex h-screen w-screen flex-col">
             {children}
           </div>
         </RootProviders>
