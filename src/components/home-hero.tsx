@@ -1,52 +1,51 @@
-import { Button } from '@heroui/react';
-import { Icon } from '@iconify/react';
+import { Button, Divider } from '@heroui/react';
+import { ChevronRight } from 'lucide-react';
 
 export default function HomeHero() {
   return (
     <section className="container mx-auto mt-20 flex flex-col items-center gap-6 bg-background p-8 text-center">
       <Button
-        className="h-9 border-1 border-default-100 bg-default-50 px-[18px] text-default-500 text-small"
-        endContent={<Icon icon="solar:arrow-right-linear" width={20} />}
+        className="border-1"
+        variant="ghost"
         radius="full"
-        variant="bordered"
+        size="sm"
+        endContent={
+          <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-all duration-300 ease-out group-hover:translate-x-1" />
+        }
       >
-        New onboarding experience
+        🚀
+        <Divider className="mx-2 h-3" orientation="vertical" />
+        Introducing Hero TanStack Starter!
       </Button>
 
       <h1 className="font-bold text-[clamp(40px,10vw,44px)] leading-tight tracking-tighter sm:text-[64px]">
         <span className="bg-hero-section-title bg-clip-text">
-          Easiest way to <br /> power global teams.
+          The modern way to <br /> build React applications
         </span>
       </h1>
 
-      <p className="text-default-500 sm:w-[566px] sm:text-[18px]">
-        Acme makes running global teams simple. HR, Payroll, International
-        Employment, contractor management and more.
+      <p className="text-default-700 sm:w-[566px] sm:text-[18px]">
+        Build beautiful React apps with TanStack, HeroUI, and better-auth. 
+        Own your data without relying on third-party SaaS platforms.
       </p>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
         <Button
-          className="h-10 w-[163px] bg-default-foreground text-background text-small"
-          radius="full"
+          color="primary"
+          endContent={
+            <ChevronRight className="ml-1 size-4 shrink-0 transition-all duration-300 ease-out group-hover:translate-x-1" />
+          }
         >
           Get Started
         </Button>
-
         <Button
-          className="h-10 w-[163px] border-1 border-default-100 text-small"
+          className="border-1"
+          variant="ghost"
           endContent={
-            <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100">
-              <Icon
-                icon="solar:arrow-right-linear"
-                width={16}
-                className="text-default-500"
-              />
-            </span>
+            <ChevronRight className="ml-1 size-4 shrink-0 transition-all duration-300 ease-out group-hover:translate-x-1" />
           }
-          radius="full"
-          variant="bordered"
         >
-          See our plans
+          Learn More
         </Button>
       </div>
     </section>

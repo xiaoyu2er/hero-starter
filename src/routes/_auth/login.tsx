@@ -34,7 +34,6 @@ function RouteComponent() {
         password,
         callbackURL: '/dash',
       });
-      navigate({ to: '/' });
     } catch (err) {
       setError(
         err instanceof Error

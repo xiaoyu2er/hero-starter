@@ -41,13 +41,13 @@ export const Footer = () => {
 
             <div className="h-4 w-divider bg-divider" />
 
-            <div className="inline-flex items-center rounded-full text-default-500 text-small">
+            <div className="inline-flex items-center rounded-full text-small">
               <span className="ml-1 h-2 w-2 rounded-full bg-success" />
               <span className="px-2">All systems operational</span>
             </div>
           </div>
 
-          <p className="text-default-400 text-small">
+          <p className="text-default-600 text-small">
             © {new Date().getFullYear()} Hero TanStack Starter- Building the
             future of development
           </p>
@@ -57,7 +57,7 @@ export const Footer = () => {
               isExternal
               href={''}
               aria-label="X"
-              className="text-default-400"
+              className="text-default-600"
             >
               <TwitterIcon className="w-6" />
             </Link>
@@ -65,7 +65,7 @@ export const Footer = () => {
               isExternal
               href={''}
               aria-label="Github"
-              className="text-default-400"
+              className="text-default-600"
             >
               <GithubIcon className="w-6" />
             </Link>
@@ -73,7 +73,7 @@ export const Footer = () => {
               isExternal
               href={''}
               aria-label="Discord"
-              className="text-default-400"
+              className="text-default-600"
             >
               <DiscordIcon className="w-6" />
             </Link>
@@ -82,7 +82,7 @@ export const Footer = () => {
 
         <div className="mt-16 sm:grid sm:grid-cols-3 sm:gap-8 xl:mt-0">
           <div>
-            <h3 className="font-semibold text-default-600 text-small">
+            <h3 className="font-semibold text-default-800 text-small">
               Products
             </h3>
             <ul className="mt-2 space-y-1.5">
@@ -90,7 +90,7 @@ export const Footer = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-default-400 text-small"
+                    className="text-default-600 text-small"
                   >
                     {item.name}
                   </Link>
@@ -100,7 +100,7 @@ export const Footer = () => {
           </div>
 
           <div className="mt-8 md:mt-0">
-            <h3 className="font-semibold text-default-600 text-small">
+            <h3 className="font-semibold text-default-800 text-small">
               Resources
             </h3>
             <ul className="mt-2 space-y-1.5">
@@ -108,7 +108,7 @@ export const Footer = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-default-400 text-small"
+                    className="text-default-600 text-small"
                   >
                     {item.name}
                   </Link>
@@ -118,7 +118,7 @@ export const Footer = () => {
           </div>
 
           <div className="mt-8 md:mt-0">
-            <h3 className="font-semibold text-default-600 text-small">
+            <h3 className="font-semibold text-default-800 text-small">
               Compare
             </h3>
             <ul className="mt-2 space-y-1.5">
@@ -126,7 +126,7 @@ export const Footer = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-default-400 text-small"
+                    className="text-default-600 text-small"
                   >
                     {item.name}
                   </Link>
@@ -134,7 +134,7 @@ export const Footer = () => {
               ))}
             </ul>
 
-            <h3 className="mt-8 font-semibold text-default-600 text-small">
+            <h3 className='mt-8 font-semibold text-default-800 text-small'>
               Legal
             </h3>
             <ul className="mt-2 space-y-1.5">
@@ -142,7 +142,7 @@ export const Footer = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-default-400 text-small"
+                    className="text-default-600 text-small"
                   >
                     {item.name}
                   </Link>

@@ -15,20 +15,20 @@ import { RootProviders } from '~/components/RootProviders';
 import appCss from '~/styles/app.css?url';
 import { seo } from '~/lib/seo';
 import type { QueryClient } from '@tanstack/react-query';
-import { getSession } from '~/server/auth';
 import { cn } from '~/lib/cn';
+import { querySessionOptions } from '~/lib/queries/auth';
 
 type RootContext = {
   queryClient: QueryClient;
-} & Awaited<ReturnType<typeof getSession>>;
+  // auth: ReturnType<typeof getSession>
+};
 
 export const Route = createRootRouteWithContext<RootContext>()({
-  beforeLoad: async ({ context }) => {
-    const session = await context.queryClient.fetchQuery({
-      queryKey: ['session'],
-      queryFn: () => getSession(),
-    });
-    return session;
+  loader: ({ context }) => {
+    const $auth = context.queryClient.fetchQuery(querySessionOptions);
+    return {
+      $auth,
+    };
   },
   head: () => ({
     meta: [
@@ -98,9 +98,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           'relative min-h-screen w-full scroll-smooth bg-background antialiased'
         )}
       >
-        <RootProviders>
-          {children}
-        </RootProviders>
+        <RootProviders>{children}</RootProviders>
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
