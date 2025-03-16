@@ -15,17 +15,8 @@ import { RootProviders } from '~/components/RootProviders';
 // @ts-ignore
 import appCss from '~/styles/app.css?url';
 import { seo } from '~/lib/seo';
-import { getWebRequest } from '@tanstack/react-start/server';
-import { auth } from '~/lib/auth';
 import type { QueryClient } from '@tanstack/react-query';
-import { createServerFn } from '@tanstack/react-start';
-
-const getSession = createServerFn({ method: 'GET' }).handler(async () => {
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  const { headers } = getWebRequest()!;
-  const session = await auth.api.getSession({ headers });
-  return session;
-});
+import { getSession } from '~/server/auth';
 
 type RootContext = {
   queryClient: QueryClient;
@@ -35,7 +26,7 @@ export const Route = createRootRouteWithContext<RootContext>()({
   beforeLoad: async ({ context }) => {
     const session = await context.queryClient.fetchQuery({
       queryKey: ['session'],
-      queryFn: ({ signal }) => getSession({ signal }),
+      queryFn: () => getSession(),
     });
     return session;
   },
