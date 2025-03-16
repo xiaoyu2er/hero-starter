@@ -99,7 +99,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         )}
       >
         <RootProviders>
-          <div className="flex h-screen w-screen flex-col">{children}</div>
+          {children}
         </RootProviders>
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />

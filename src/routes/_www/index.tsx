@@ -1,5 +1,5 @@
 import { createFileRoute, useRouteContext } from '@tanstack/react-router';
-import HomePage from '~/pages/home';
+import HomeHero from '~/pages/home-hero';
 
 export const Route = createFileRoute('/_www/')({
   component: Home,
@@ -8,7 +8,5 @@ export const Route = createFileRoute('/_www/')({
 function Home() {
   const { session, user } = useRouteContext({ from: '/_www/' });
 
-  return (
-    <HomePage />
-  );
+  return <HomeHero />;
 }

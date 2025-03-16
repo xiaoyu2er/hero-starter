@@ -30,7 +30,7 @@ const legal = [
 
 export const Footer = () => {
   return (
-    <footer className="mx-auto w-full max-w-7xl border-white/5 border-t-1 px-4 pt-16 pb-8 md:px-12 lg:mt-12 lg:px-8">
+    <footer className='mx-auto w-full max-w-7xl border-white/5 px-4 pt-16 pb-8 md:px-12 lg:mt-12 lg:px-8'>
       <div className="xl:grid xl:grid-cols-2 xl:gap-8">
         <div className="space-y-8 md:pr-8">
           <div className="flex items-center gap-3">

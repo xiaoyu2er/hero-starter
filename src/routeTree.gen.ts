@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashRouteImport } from './routes/dash/route'
+import { Route as WwwRouteImport } from './routes/_www/route'
 import { Route as DashIndexImport } from './routes/dash/index'
 import { Route as WwwIndexImport } from './routes/_www/index'
 import { Route as AuthSignupImport } from './routes/_auth/signup'
@@ -25,6 +26,11 @@ const DashRouteRoute = DashRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const WwwRouteRoute = WwwRouteImport.update({
+  id: '/_www',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const DashIndexRoute = DashIndexImport.update({
   id: '/',
   path: '/',
@@ -32,9 +38,9 @@ const DashIndexRoute = DashIndexImport.update({
 } as any)
 
 const WwwIndexRoute = WwwIndexImport.update({
-  id: '/_www/',
+  id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => WwwRouteRoute,
 } as any)
 
 const AuthSignupRoute = AuthSignupImport.update({
@@ -53,6 +59,13 @@ const AuthLoginRoute = AuthLoginImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_www': {
+      id: '/_www'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof WwwRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/dash': {
       id: '/dash'
       path: '/dash'
@@ -79,7 +92,7 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof WwwIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof WwwRouteImport
     }
     '/dash/': {
       id: '/dash/'
@@ -92,6 +105,18 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface WwwRouteRouteChildren {
+  WwwIndexRoute: typeof WwwIndexRoute
+}
+
+const WwwRouteRouteChildren: WwwRouteRouteChildren = {
+  WwwIndexRoute: WwwIndexRoute,
+}
+
+const WwwRouteRouteWithChildren = WwwRouteRoute._addFileChildren(
+  WwwRouteRouteChildren,
+)
 
 interface DashRouteRouteChildren {
   DashIndexRoute: typeof DashIndexRoute
@@ -106,6 +131,7 @@ const DashRouteRouteWithChildren = DashRouteRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
+  '': typeof WwwRouteRouteWithChildren
   '/dash': typeof DashRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
@@ -122,6 +148,7 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/_www': typeof WwwRouteRouteWithChildren
   '/dash': typeof DashRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
@@ -131,11 +158,12 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dash' | '/login' | '/signup' | '/' | '/dash/'
+  fullPaths: '' | '/dash' | '/login' | '/signup' | '/' | '/dash/'
   fileRoutesByTo: FileRoutesByTo
   to: '/login' | '/signup' | '/' | '/dash'
   id:
     | '__root__'
+    | '/_www'
     | '/dash'
     | '/_auth/login'
     | '/_auth/signup'
@@ -145,17 +173,17 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
+  WwwRouteRoute: typeof WwwRouteRouteWithChildren
   DashRouteRoute: typeof DashRouteRouteWithChildren
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
-  WwwIndexRoute: typeof WwwIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  WwwRouteRoute: WwwRouteRouteWithChildren,
   DashRouteRoute: DashRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
-  WwwIndexRoute: WwwIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -168,9 +196,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/_www",
         "/dash",
         "/_auth/login",
-        "/_auth/signup",
+        "/_auth/signup"
+      ]
+    },
+    "/_www": {
+      "filePath": "_www/route.tsx",
+      "children": [
         "/_www/"
       ]
     },
@@ -187,7 +221,8 @@ export const routeTree = rootRoute
       "filePath": "_auth/signup.tsx"
     },
     "/_www/": {
-      "filePath": "_www/index.tsx"
+      "filePath": "_www/index.tsx",
+      "parent": "/_www"
     },
     "/dash/": {
       "filePath": "dash/index.tsx",
