@@ -7,7 +7,7 @@ import { Footer } from './footer';
 export default function HomePage() {
   return (
     <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
-      <BasicNavbar />
+      <BasicNavbar /> 
       <div className="relative flex w-full flex-1 flex-col overflow-hidden bg-background">
         <main className="container mx-auto flex flex-1 items-center justify-center px-8">
           <section className="flex flex-col items-center gap-6 text-center">
