@@ -18,7 +18,8 @@ import {
 } from "@heroui/react";
 import {Icon} from "@iconify/react";
 
-import {AcmeIcon} from "./social";
+import {AcmeIcon} from "./icons/social";
+import { ModeToggle } from "~/components/mode-toggle";
 
 const menuItems = [
   "About",
@@ -90,8 +91,8 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
 
         {/* Right Content */}
         <NavbarContent className="hidden md:flex" justify="end">
-          <NavbarItem className='!flex ml-2 gap-2'>
-            <Button className="text-default-500" radius="full" variant="light">
+          <NavbarItem className='!flex ml-2 items-center gap-2'>
+            <Button className="text-default-500" radius="full" variant="light" size="sm">
               Login
             </Button>
             <Button
@@ -100,12 +101,16 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
               endContent={<Icon icon="solar:alt-arrow-right-linear" />}
               radius="full"
               variant="flat"
+              size="sm"
             >
               Get Started
             </Button>
+            <ModeToggle />
           </NavbarItem>
         </NavbarContent>
 
+
+        <ModeToggle className="md:hidden" />
         <NavbarMenuToggle className="text-default-400 md:hidden" />
 
         <NavbarMenu

@@ -1,8 +1,8 @@
 import { Button } from '@heroui/react';
 import { Icon } from '@iconify/react';
 
-import BasicNavbar from './basic-navbar';
-import { Footer } from './footer';
+import BasicNavbar from '~/components/basic-navbar';
+import { Footer } from '~/components/footer';
 
 export default function HomePage() {
   return (

@@ -1,5 +1,10 @@
 import { Link } from '@heroui/react';
-import { AcmeIcon, DiscordIcon, GithubIcon, TwitterIcon } from './social';
+import {
+  AcmeIcon,
+  DiscordIcon,
+  GithubIcon,
+  TwitterIcon,
+} from '~/components/icons/social';
 
 const products = [
   { name: 'Links', href: '/' },

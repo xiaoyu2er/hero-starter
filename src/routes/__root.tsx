@@ -16,6 +16,7 @@ import appCss from '~/styles/app.css?url';
 import { seo } from '~/lib/seo';
 import type { QueryClient } from '@tanstack/react-query';
 import { getSession } from '~/server/auth';
+import { cn } from '~/lib/cn';
 
 type RootContext = {
   queryClient: QueryClient;
@@ -92,11 +93,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body
+        className={cn(
+          'relative min-h-screen w-full scroll-smooth bg-background antialiased'
+        )}
+      >
         <RootProviders>
-          <div className="flex h-screen w-screen flex-col">
-            {children}
-          </div>
+          <div className="flex h-screen w-screen flex-col">{children}</div>
         </RootProviders>
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
