@@ -10,7 +10,8 @@
     "lint": "ultracite lint",
     "format": "ultracite format",
     "generate": "npx @better-auth/cli generate --output ./prisma/schema.prisma --config ./src/lib/auth.ts",
-    "migrate": "npx prisma format && npx prisma generate && npx prisma db push"
+    "migrate": "npx prisma format && npx prisma generate && npx prisma db push",
+    "migrate:prod": "dotenv -e .env.prod -- npx prisma db push deploy"
   },
   "dependencies": {
     "@heroui/react": "^2.7.5",
@@ -35,6 +36,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.20",
+    "dotenv-cli": "^8.0.0",
     "postcss": "^8.5.1",
     "prisma": "^6.5.0",
     "tailwindcss": "^3.4.17",
