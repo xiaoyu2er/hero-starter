@@ -1,12 +1,11 @@
 import {
   HeadContent,
-  Link,
   Outlet,
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import type * as React from 'react';
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
@@ -42,7 +41,8 @@ export const Route = createRootRouteWithContext<RootContext>()({
       ...seo({
         title:
           'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-        description: 'TanStack Start is a type-safe, client-first, full-stack React framework. ',
+        description:
+          'TanStack Start is a type-safe, client-first, full-stack React framework. ',
       }),
     ],
     links: [
@@ -88,25 +88,15 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
       <body>
         <RootProviders>
-          <div className="flex gap-2 p-2 text-lg">
-            <Link
-              to="/"
-              activeProps={{
-                className: 'font-bold',
-              }}
-              activeOptions={{ exact: true }}
-            >
-              Home
-            </Link>{' '}
+          <div className="flex h-screen w-screen items-start justify-center">
+            {children}
           </div>
-          <hr />
-          {children}
         </RootProviders>
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
