@@ -16,6 +16,7 @@ dist
 /server/build
 /public/build
 .vinxi
+supabase
 # Sentry Config File
 .env.sentry-build-plugin
 /test-results/

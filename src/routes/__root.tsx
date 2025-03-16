@@ -3,17 +3,42 @@ import {
   Link,
   Outlet,
   Scripts,
-  createRootRoute,
+  createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import type * as React from 'react';
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { RootProviders } from '~/components/RootProviders';
-import appCss from '~/styles/app.css';
-import { seo } from '~/utils/seo';
+// @ts-ignore
+import appCss from '~/styles/app.css?url';
+import { seo } from '~/lib/seo';
+import { getWebRequest } from '@tanstack/react-start/server';
+import { auth } from '~/lib/auth';
+import type { QueryClient } from '@tanstack/react-query';
+import { createServerFn } from '@tanstack/react-start';
 
-export const Route = createRootRoute({
+const getSession = createServerFn({ method: 'GET' }).handler(async () => {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  const { headers } = getWebRequest()!;
+  const session = await auth.api.getSession({ headers });
+  return session;
+});
+
+type RootContext = {
+  queryClient: QueryClient;
+} & Awaited<ReturnType<typeof getSession>>;
+
+export const Route = createRootRouteWithContext<RootContext>()({
+  beforeLoad: async ({ context }) => {
+    const session = await context.queryClient.fetchQuery({
+      queryKey: ['session'],
+      queryFn: ({ signal }) => getSession({ signal }),
+    });
+    return session;
+  },
   head: () => ({
     meta: [
       {
@@ -26,7 +51,7 @@ export const Route = createRootRoute({
       ...seo({
         title:
           'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+        description: 'TanStack Start is a type-safe, client-first, full-stack React framework. ',
       }),
     ],
     links: [
@@ -48,7 +73,6 @@ export const Route = createRootRoute({
         sizes: '16x16',
         href: '/favicon-16x16.png',
       },
-      { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
@@ -73,7 +97,7 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
@@ -89,51 +113,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             >
               Home
             </Link>{' '}
-            <Link
-              to="/posts"
-              activeProps={{
-                className: 'font-bold',
-              }}
-            >
-              Posts
-            </Link>{' '}
-            <Link
-              to="/users"
-              activeProps={{
-                className: 'font-bold',
-              }}
-            >
-              Users
-            </Link>{' '}
-            <Link
-              to="/route-a"
-              activeProps={{
-                className: 'font-bold',
-              }}
-            >
-              Pathless Layout
-            </Link>{' '}
-            <Link
-              to="/deferred"
-              activeProps={{
-                className: 'font-bold',
-              }}
-            >
-              Deferred
-            </Link>{' '}
-            <Link
-              // @ts-expect-error
-              to="/this-route-does-not-exist"
-              activeProps={{
-                className: 'font-bold',
-              }}
-            >
-              This Route Does Not Exist
-            </Link>
           </div>
           <hr />
           {children}
         </RootProviders>
+        <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
