@@ -15,3 +15,17 @@ export const zSignUpSchema = z.object({
     message: "You must accept the terms and conditions",
   }),
 });
+
+export const zForgotPasswordSchema = z.object({
+  email: zEmail,
+});
+
+export const zResetPasswordSearchSchema = z.object({
+  token: z.string().optional(),
+  error: z.string().optional(),
+});
+
+export const zResetPasswordSchema = z.object({
+  newPassword: zPassword,
+  token: z.string().min(1, "Token is required"),
+});
