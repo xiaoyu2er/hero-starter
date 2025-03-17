@@ -106,7 +106,6 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
           <NavbarItem className="!flex ml-2 items-center gap-2">
             {!isLoading && !data?.session && (
               <Button
-                radius="full"
                 color="primary"
                 size="sm"
                 as={RouterLink}
@@ -119,7 +118,6 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
               <Button
                 color="primary"
                 endContent={<Icon icon="solar:alt-arrow-right-linear" />}
-                radius="full"
                 variant="flat"
                 size="sm"
                 as={RouterLink}
