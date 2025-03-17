@@ -1,94 +1,108 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Input,
-  Form,
-} from '@heroui/react';
+import { addToast, Checkbox } from '@heroui/react';
 import { authClient } from '~/lib/auth-client';
+import { useAppForm } from '~/components/forms';
+import { zLoginSchema } from '~/lib/zod/auth';
+import { Link, Form } from '@heroui/react';
+import { DividerOr } from '~/components/auth/divider-or';
+import { OauthButtons } from '~/components/auth/oauth-buttons';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const Route = createFileRoute('/_auth/login')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
-    try {
-      await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: '/dash',
+  const form = useAppForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    validators: {
+      onSubmit: zLoginSchema,
+    },
+    onSubmit: async ({ value }) => {
+      const { error } = await authClient.signIn.email({
+        email: value.email,
+        password: value.password,
       });
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Failed to login. Please try again.'
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+      if (error) {
+        addToast({
+          title: 'Error',
+          description: error.message,
+          color: 'danger',
+          timeout: 3000,
+        });
+        return;
+      }
+      addToast({
+        title: 'Success',
+        description: 'Login successful',
+        color: 'success',
+        timeout: 3000,
+      });
+      queryClient.invalidateQueries({ queryKey: ['session'] });
+      navigate({ to: '/dash' });
+    },
+  });
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardHeader className="flex flex-col gap-1">
-          <h2 className="font-bold text-2xl">Login</h2>
-          <p className="text-default-500">Enter your credentials to continue</p>
-        </CardHeader>
-        <Divider />
-        <CardBody>
-          <Form onSubmit={handleLogin} className="space-y-4">
-            <Input
-              label="Email"
-              placeholder="Enter your email"
-              type="email"
-              value={email}
-              variant="bordered"
-              isRequired
-              onValueChange={setEmail}
-            />
-            <Input
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-              value={password}
-              variant="bordered"
-              isRequired
-              onValueChange={setPassword}
-            />
-            {error && <div className="mt-2 text-danger text-sm">{error}</div>}
-          </Form>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between">
-          <Button
-            className="w-full"
-            color="primary"
-            isDisabled={isLoading || !email || !password}
-            isLoading={isLoading}
-            onClick={handleLogin}
-            type="submit"
-          >
-            Login
-          </Button>
-        </CardFooter>
-      </Card>
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pt-6 pb-10 shadow-small">
+        <div className="flex flex-col gap-1">
+          <h1 className="font-medium text-large">Sign in</h1>
+          <p className="text-default-500 text-small">to continue to Acme</p>
+        </div>
+        <OauthButtons />
+        <DividerOr />
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            form.handleSubmit();
+          }}
+          className="flex flex-col gap-3"
+        >
+          <form.AppField
+            name="email"
+            children={(filed) => (
+              <filed.InputField
+                label="Email"
+                type="email"
+                isRequired
+                placeholder="Enter your email"
+              />
+            )}
+          />
+          <form.AppField
+            name="password"
+            children={(filed) => (
+              <filed.PasswordField
+                label="Password"
+                isRequired
+                placeholder="Enter your password"
+              />
+            )}
+          />
+          <div className="flex w-full items-center justify-between px-1 py-2">
+            <Checkbox name="remember" size="sm">
+              Remember me
+            </Checkbox>
+            <Link className="text-default-500" href="#" size="sm">
+              Forgot password?
+            </Link>
+          </div>
+          <form.AppForm>
+            <form.SubmitButton className="w-full" color="primary">
+              Sign In
+            </form.SubmitButton>
+          </form.AppForm>
+        </Form>
+      </div>
     </div>
   );
 }

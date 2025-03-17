@@ -8,7 +8,6 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import type * as React from 'react';
-import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { RootProviders } from '~/components/RootProviders';
 // @ts-ignore
@@ -68,13 +67,13 @@ export const Route = createRootRouteWithContext<RootContext>()({
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  errorComponent: (props) => {
-    return (
-      <RootDocument>
-        <DefaultCatchBoundary {...props} />
-      </RootDocument>
-    );
-  },
+  // errorComponent: (props) => {
+  //   return (
+  //     <RootDocument>
+  //       <DefaultCatchBoundary {...props} />
+  //     </RootDocument>
+  //   );
+  // },
   notFoundComponent: () => <NotFound />,
   component: RootComponent,
 });

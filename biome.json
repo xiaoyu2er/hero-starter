@@ -6,5 +6,12 @@
   },
   "files": {
     "ignore": [".vinxi/**", "node_modules/**"]
+  },
+  "linter": {
+    "rules": {
+      "correctness": {
+        "noChildrenProp": "off"
+      }
+    }
   }
 }

@@ -3,7 +3,7 @@ import { ChevronRight } from 'lucide-react';
 
 export default function HomeHero() {
   return (
-    <section className="container mx-auto mt-20 flex flex-col items-center gap-6 bg-background p-8 text-center">
+    <section className="container mx-auto mt-20 mb-20 flex flex-col items-center gap-6 bg-background p-8 text-center">
       <Button
         className="border-1"
         variant="ghost"

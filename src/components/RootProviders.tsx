@@ -1,5 +1,6 @@
 import { HeroUIProvider } from '@heroui/react';
 import { ThemeProvider } from 'next-themes';
+import { ToastProvider } from '@heroui/toast';
 import type * as React from 'react';
 
 export function RootProviders({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,10 @@ export function RootProviders({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <HeroUIProvider>{children}</HeroUIProvider>
+      <HeroUIProvider>
+        <ToastProvider />
+        {children}
+      </HeroUIProvider>
     </ThemeProvider>
   );
 }
