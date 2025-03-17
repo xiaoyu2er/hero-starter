@@ -1,15 +1,16 @@
-import { Link } from '@heroui/react';
+
 import type { FC } from 'react';
+import { Link } from '~/components/Link';
 
 export const TermsPrivacy: FC = () => {
   return (
     <p className="px-8 text-center text-muted-foreground text-sm">
       By clicking continue, you agree to our{' '}
-      <Link isExternal size="sm" href={'/legal/terms'}>
-        Terms of Service
+      <Link isExternal size="sm" to={'/legal/terms'}>
+        Terms
       </Link>{' '}
       and{' '}
-      <Link isExternal size="sm" href={'/legal/privacy'}>
+      <Link isExternal size="sm" to={'/legal/privacy'}>
         Privacy Policy
       </Link>
     </p>

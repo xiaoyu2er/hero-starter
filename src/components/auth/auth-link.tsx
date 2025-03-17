@@ -1,24 +1,15 @@
-import { Link, cn } from '@heroui/react';
-import type { FC, ReactNode } from 'react';
+import { cn } from '@heroui/react';
+import type {} from 'react';
+import { Link } from '~/components/Link';
+import type { LinkType } from '~/components/Link';
 
-export type AuthLinkProps = {
-  href?: string;
-  children: ReactNode;
-  className?: string;
-  onPress?: () => void;
-  withSearchParams?: boolean;
-};
-
-export const AuthLink: FC<AuthLinkProps> = ({
-  href,
-  children,
-  className,
-  onPress,
-}) => {
+export const AuthLink: LinkType = ({ to, children, className, onPress }) => {
   return (
+    // @ts-ignore
     <Link
-      href={href}
+      to={to}
       underline="hover"
+      color="foreground"
       size="sm"
       className={cn('font-medium text-xs', className)}
       // TODO: onPress will prevent the default behavior of the link

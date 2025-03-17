@@ -16,7 +16,10 @@ import { Route as WwwRouteImport } from './routes/_www/route'
 import { Route as AuthRouteImport } from './routes/_auth/route'
 import { Route as DashIndexImport } from './routes/dash/index'
 import { Route as WwwIndexImport } from './routes/_www/index'
-import { Route as AuthSignupImport } from './routes/_auth/signup'
+import { Route as LegalTermsImport } from './routes/legal/terms'
+import { Route as LegalPrivacyImport } from './routes/legal/privacy'
+import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
+import { Route as AuthResetPasswordImport } from './routes/_auth/reset-password'
 import { Route as AuthLoginImport } from './routes/_auth/login'
 
 // Create/Update Routes
@@ -49,9 +52,27 @@ const WwwIndexRoute = WwwIndexImport.update({
   getParentRoute: () => WwwRouteRoute,
 } as any)
 
-const AuthSignupRoute = AuthSignupImport.update({
-  id: '/signup',
-  path: '/signup',
+const LegalTermsRoute = LegalTermsImport.update({
+  id: '/legal/terms',
+  path: '/legal/terms',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LegalPrivacyRoute = LegalPrivacyImport.update({
+  id: '/legal/privacy',
+  path: '/legal/privacy',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignUpRoute = AuthSignUpImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+
+const AuthResetPasswordRoute = AuthResetPasswordImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => AuthRouteRoute,
 } as any)
 
@@ -93,12 +114,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginImport
       parentRoute: typeof AuthRouteImport
     }
-    '/_auth/signup': {
-      id: '/_auth/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof AuthSignupImport
+    '/_auth/reset-password': {
+      id: '/_auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordImport
       parentRoute: typeof AuthRouteImport
+    }
+    '/_auth/sign-up': {
+      id: '/_auth/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof AuthSignUpImport
+      parentRoute: typeof AuthRouteImport
+    }
+    '/legal/privacy': {
+      id: '/legal/privacy'
+      path: '/legal/privacy'
+      fullPath: '/legal/privacy'
+      preLoaderRoute: typeof LegalPrivacyImport
+      parentRoute: typeof rootRoute
+    }
+    '/legal/terms': {
+      id: '/legal/terms'
+      path: '/legal/terms'
+      fullPath: '/legal/terms'
+      preLoaderRoute: typeof LegalTermsImport
+      parentRoute: typeof rootRoute
     }
     '/_www/': {
       id: '/_www/'
@@ -121,12 +163,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
-  AuthSignupRoute: typeof AuthSignupRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
-  AuthSignupRoute: AuthSignupRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
@@ -161,7 +205,10 @@ export interface FileRoutesByFullPath {
   '': typeof WwwRouteRouteWithChildren
   '/dash': typeof DashRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
-  '/signup': typeof AuthSignupRoute
+  '/reset-password': typeof AuthResetPasswordRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/legal/privacy': typeof LegalPrivacyRoute
+  '/legal/terms': typeof LegalTermsRoute
   '/': typeof WwwIndexRoute
   '/dash/': typeof DashIndexRoute
 }
@@ -169,7 +216,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '': typeof AuthRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
-  '/signup': typeof AuthSignupRoute
+  '/reset-password': typeof AuthResetPasswordRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/legal/privacy': typeof LegalPrivacyRoute
+  '/legal/terms': typeof LegalTermsRoute
   '/': typeof WwwIndexRoute
   '/dash': typeof DashIndexRoute
 }
@@ -180,23 +230,46 @@ export interface FileRoutesById {
   '/_www': typeof WwwRouteRouteWithChildren
   '/dash': typeof DashRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
-  '/_auth/signup': typeof AuthSignupRoute
+  '/_auth/reset-password': typeof AuthResetPasswordRoute
+  '/_auth/sign-up': typeof AuthSignUpRoute
+  '/legal/privacy': typeof LegalPrivacyRoute
+  '/legal/terms': typeof LegalTermsRoute
   '/_www/': typeof WwwIndexRoute
   '/dash/': typeof DashIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dash' | '/login' | '/signup' | '/' | '/dash/'
+  fullPaths:
+    | ''
+    | '/dash'
+    | '/login'
+    | '/reset-password'
+    | '/sign-up'
+    | '/legal/privacy'
+    | '/legal/terms'
+    | '/'
+    | '/dash/'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/login' | '/signup' | '/' | '/dash'
+  to:
+    | ''
+    | '/login'
+    | '/reset-password'
+    | '/sign-up'
+    | '/legal/privacy'
+    | '/legal/terms'
+    | '/'
+    | '/dash'
   id:
     | '__root__'
     | '/_auth'
     | '/_www'
     | '/dash'
     | '/_auth/login'
-    | '/_auth/signup'
+    | '/_auth/reset-password'
+    | '/_auth/sign-up'
+    | '/legal/privacy'
+    | '/legal/terms'
     | '/_www/'
     | '/dash/'
   fileRoutesById: FileRoutesById
@@ -206,12 +279,16 @@ export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   WwwRouteRoute: typeof WwwRouteRouteWithChildren
   DashRouteRoute: typeof DashRouteRouteWithChildren
+  LegalPrivacyRoute: typeof LegalPrivacyRoute
+  LegalTermsRoute: typeof LegalTermsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   WwwRouteRoute: WwwRouteRouteWithChildren,
   DashRouteRoute: DashRouteRouteWithChildren,
+  LegalPrivacyRoute: LegalPrivacyRoute,
+  LegalTermsRoute: LegalTermsRoute,
 }
 
 export const routeTree = rootRoute
@@ -226,14 +303,17 @@ export const routeTree = rootRoute
       "children": [
         "/_auth",
         "/_www",
-        "/dash"
+        "/dash",
+        "/legal/privacy",
+        "/legal/terms"
       ]
     },
     "/_auth": {
       "filePath": "_auth/route.tsx",
       "children": [
         "/_auth/login",
-        "/_auth/signup"
+        "/_auth/reset-password",
+        "/_auth/sign-up"
       ]
     },
     "/_www": {
@@ -252,9 +332,19 @@ export const routeTree = rootRoute
       "filePath": "_auth/login.tsx",
       "parent": "/_auth"
     },
-    "/_auth/signup": {
-      "filePath": "_auth/signup.tsx",
+    "/_auth/reset-password": {
+      "filePath": "_auth/reset-password.tsx",
       "parent": "/_auth"
+    },
+    "/_auth/sign-up": {
+      "filePath": "_auth/sign-up.tsx",
+      "parent": "/_auth"
+    },
+    "/legal/privacy": {
+      "filePath": "legal/privacy.tsx"
+    },
+    "/legal/terms": {
+      "filePath": "legal/terms.tsx"
     },
     "/_www/": {
       "filePath": "_www/index.tsx",

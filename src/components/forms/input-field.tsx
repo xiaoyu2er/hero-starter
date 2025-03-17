@@ -6,11 +6,11 @@ export const InputField = (props: InputProps) => {
   return (
     <Input
       variant="bordered"
+      errorMessage={field.state.meta.errors?.[0]?.message}
       isInvalid={!!field.state.meta.errors.length}
       aria-label={field.name}
       value={field.state.value}
       onValueChange={field.setValue}
-      errorMessage={field.state.meta.errors?.[0]?.message}
       {...props}
     />
   );
