@@ -36,7 +36,7 @@ export const Footer = () => {
           <div className="flex items-center gap-3">
             <div className="flex items-center">
               <AcmeIcon />
-              <span className="font-medium text-small">Hero TSS</span>
+              <span className="font-medium text-small">{import.meta.env.VITE_APP_NAME}</span>
             </div>
 
             <div className="h-4 w-divider bg-divider" />

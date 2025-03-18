@@ -60,7 +60,7 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
             <AcmeIcon size={34} />
           </div>
           <span className="ml-2 font-medium text-default-foreground text-small">
-            ACME
+            {import.meta.env.VITE_APP_NAME}
           </span>
         </NavbarBrand>
 

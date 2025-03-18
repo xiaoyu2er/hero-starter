@@ -5,8 +5,7 @@ export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
   plugins: [
     oneTapClient({
-      // @ts-ignore
-      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
+      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       // Optional client configuration:
       autoSelect: false,
       cancelOnTapOutside: true,

@@ -116,7 +116,7 @@ function RouteComponent() {
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pt-6 pb-10 shadow-small">
         <div className="flex flex-col gap-1">
           <h1 className="font-medium text-large">Sign up</h1>
-          <p className="text-default-500 text-small">to continue to Acme</p>
+          <p className="text-default-500 text-small">to continue to {import.meta.env.VITE_APP_NAME}</p>
         </div>
         <OauthButtons />
         <DividerOr />
