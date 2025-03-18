@@ -19,7 +19,7 @@ const resources = [
   { name: 'Pricing', href: '/pricing' },
 ];
 
-const compares = [{ name: 'TanStack vs Next', href: '/blog/hero-tss-vs-next' }];
+const compares = [{ name: 'TanStack vs Next', href: '/blog/tanstack-vs-next' }];
 
 const legal = [
   { name: 'Privacy', href: '/legal/privacy' },

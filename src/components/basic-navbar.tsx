@@ -59,9 +59,6 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
           <div className="rounded-full bg-default-foreground text-background">
             <AcmeIcon size={34} />
           </div>
-          <span className="ml-2 font-medium text-default-foreground text-small">
-            {import.meta.env.VITE_APP_NAME}
-          </span>
         </NavbarBrand>
 
         {/* Center Content */}

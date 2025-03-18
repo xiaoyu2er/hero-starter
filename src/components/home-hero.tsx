@@ -16,15 +16,15 @@ export default function HomeHero() {
       >
         🚀
         <Divider className="mx-2 h-3" orientation="vertical" />
-        Introducing Hero TanStack Starter!
+        Introducing Hero Starter!
       </Button>
 
       <div className="flex flex-col items-center gap-8 px-4 text-center">
-        <h1 className='flex flex-col items-center gap-3 font-black text-4xl uppercase [letter-spacing:-.05em] md:flex-row md:text-5xl lg:text-6xl xl:text-7xl'>
+        <h1 className='flex flex-col items-center gap-3 font-black text-5xl uppercase [letter-spacing:-.05em] md:flex-row md:text-6xl lg:text-7xl xl:text-9xl'>
           <span className="bg-gradient-to-r from-primary-500 to-cyan-500 bg-clip-text text-transparent">
             Hero
           </span>
-          <span>TanStack Starter</span>
+          <span>Starter</span>
         </h1>
         <div className='animate-bounce whitespace-nowrap rounded-md bg-black px-2 py-1 align-super font-black text-white text-xs uppercase leading-none shadow-black/30 shadow-sm md:text-base dark:bg-white dark:text-black'>
           Status: Alpha

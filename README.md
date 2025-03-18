@@ -12,4 +12,4 @@ A modern full-stack React starter template combining the power of [TanStack Star
 
 ## 🔍 Live Demos
 
-- [Vercel Demo](https://hero-tss.vercel.app/)
+- [Vercel Demo](https://hero-starter.vercel.app/)
