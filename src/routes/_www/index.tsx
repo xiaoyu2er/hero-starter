@@ -1,3 +1,4 @@
+import { addToast } from '@heroui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
@@ -20,6 +21,11 @@ function Home() {
       authClient.oneTap({
         fetchOptions: {
           onSuccess: () => {
+            addToast({
+              title: 'Success',
+              description: 'You have been signed in',
+              color: 'success',
+            });
             queryClient.invalidateQueries({ queryKey: ['session'] });
             navigate({ to: '/dash' });
           },
