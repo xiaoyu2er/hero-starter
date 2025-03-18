@@ -1,4 +1,4 @@
-# Hero TanStack Start
+# Hero Starter
 
 A modern full-stack React starter template combining the power of [TanStack Start](https://tanstack.com/start/latest), [HeroUI](https://www.heroui.com/), and [Better-Auth](https://www.better-auth.com/).
 
