@@ -1,6 +1,7 @@
 import { Button, Link } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
+import { authClient } from '~/lib/auth-client';
 
 export const OauthGithubButton = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,9 +15,14 @@ export const OauthGithubButton = () => {
       }
       variant="bordered"
       as={Link}
-      // If we use onPress, the button will be disabled when the link is clicked, however, the link will not be navigated to.
-      onClick={() => setIsLoading(true)}
-      href={`/api/oauth/github`}
+      onPress={async () => {
+        setIsLoading(true);
+        await authClient.signIn.social({
+          provider: 'github',
+          callbackURL: '/dash',
+        });
+        setIsLoading(false);
+      }}
       isLoading={isLoading}
     >
       Continue with Github
@@ -38,11 +44,16 @@ export const OauthGoogleButton = () => {
           />
         )
       }
-      // If we use onPress, the button will be disabled when the link is clicked, however, the link will not be navigated to.
-      onClick={() => setIsLoading(true)}
       variant="bordered"
       as={Link}
-      href={`/api/oauth/google`}
+      onPress={async () => {
+        setIsLoading(true);
+        await authClient.signIn.social({
+          provider: 'google',
+          callbackURL: '/dash',
+        });
+        setIsLoading(false);
+      }}
       isLoading={isLoading}
     >
       Continue with Google

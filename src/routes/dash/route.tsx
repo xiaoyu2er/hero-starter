@@ -22,13 +22,13 @@ export const Route = createFileRoute('/dash')({
 });
 
 function RouteComponent() {
-  const { session } = useRouteContext({ from: '/dash' });
+  const { user } = useRouteContext({ from: '/dash' });
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return (
     <div>
-      <h1>Dashboard {session.id}</h1>
+      <h1>Dashboard {user.email}</h1>
       <Outlet />
       <Button
         color="primary"
