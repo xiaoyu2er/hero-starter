@@ -16,6 +16,7 @@ import { seo } from '~/lib/seo';
 import type { QueryClient } from '@tanstack/react-query';
 import { cn } from '~/lib/cn';
 import { querySessionOptions } from '~/lib/queries/auth';
+import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 
 type RootContext = {
   queryClient: QueryClient;
@@ -67,13 +68,13 @@ export const Route = createRootRouteWithContext<RootContext>()({
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  // errorComponent: (props) => {
-  //   return (
-  //     <RootDocument>
-  //       <DefaultCatchBoundary {...props} />
-  //     </RootDocument>
-  //   );
-  // },
+  errorComponent: (props) => {
+    return (
+      <RootDocument>
+        <DefaultCatchBoundary {...props} />
+      </RootDocument>
+    );
+  },
   notFoundComponent: () => <NotFound />,
   component: RootComponent,
 });

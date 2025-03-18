@@ -1,25 +1,44 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from '@tanstack/react-router';
+import { Button, Divider, Image } from '@heroui/react';
 
-export function NotFound({ children }: { children?: any }) {
+export function NotFound({ children }: { children?: React.ReactNode }) {
+  const router = useRouter();
   return (
-    <div className="space-y-2 p-2">
-      <div className="text-gray-600 dark:text-gray-400">
-        {children || <p>The page you are looking for does not exist.</p>}
+    <div className="flex min-h-screen w-full flex-col items-center justify-center py-8 text-center">
+      <h3 className="mb-2 font-bold text-3xl">Sorry, page not found!</h3>
+
+      <div className="max-w-md text-gray-600 dark:text-gray-400">
+        {children || (
+          <p>
+            Sorry, we couldn't find the page you're looking for. Perhaps you've
+            mistyped the URL? Be sure to check your spelling.
+          </p>
+        )}
       </div>
-      <p className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => window.history.back()}
-          className="rounded bg-emerald-500 px-2 py-1 font-black text-sm text-white uppercase"
+      <Image
+        src="/404.svg"
+        alt="404"
+        className="mx-auto h-auto w-96"
+      />
+
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button
+          onPress={() => router.history.back()}
+          className="px-4 py-2 font-bold uppercase"
+          variant="flat"
         >
           Go back
-        </button>
-        <Link
+        </Button>
+        <Divider orientation="vertical" className="mx-1 h-6" />
+        <Button
+          as={Link}
           to="/"
-          className="rounded bg-cyan-600 px-2 py-1 font-black text-sm text-white uppercase"
+          color="primary"
+          className="px-4 py-2 font-bold uppercase"
         >
-          Start Over
-        </Link>
-      </p>
+          Go to Home
+        </Button>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 import type { ErrorComponentProps } from '@tanstack/react-router';
+import { Button, Divider, Image } from '@heroui/react';
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter();
@@ -17,35 +18,53 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   console.error('DefaultCatchBoundary Error:', error);
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-6 p-4">
-      <ErrorComponent error={error} />
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => {
-            router.invalidate();
-          }}
-          className={`rounded bg-gray-600 px-2 py-1 font-extrabold text-white uppercase dark:bg-gray-700`}
+    <div className="flex min-h-screen w-full flex-col items-center justify-center py-8 text-center">
+      <h3 className="mb-2 font-bold text-3xl">Sorry, something went wrong!</h3>
+      
+      <div className="max-w-md text-gray-600 dark:text-gray-400">
+        <p>
+          We encountered an error while processing your request. Our team has been notified.
+        </p>
+      </div>
+      
+      {process.env.NODE_ENV === 'development' && <div className="mt-4">
+        <ErrorComponent error={error} />
+      </div>}
+      
+      <Image
+        src="/500.svg"
+        alt="500 Error"
+        className='mx-auto my-6 h-auto w-96'
+      />
+
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button
+          onPress={() => router.invalidate()}
+          className="px-4 py-2 font-bold uppercase"
+          variant="flat"
         >
           Try Again
-        </button>
+        </Button>
+        
+        <Divider orientation="vertical" className="mx-1 h-6" />
+        
         {isRoot ? (
-          <Link
+          <Button
+            as={Link}
             to="/"
-            className={`rounded bg-gray-600 px-2 py-1 font-extrabold text-white uppercase dark:bg-gray-700`}
+            color="primary"
+            className="px-4 py-2 font-bold uppercase"
           >
-            Home
-          </Link>
+            Go to Home
+          </Button>
         ) : (
-          <Link
-            to="/"
-            className={`rounded bg-gray-600 px-2 py-1 font-extrabold text-white uppercase dark:bg-gray-700`}
-            onClick={(e) => {
-              e.preventDefault();
-              window.history.back();
-            }}
+          <Button
+            onPress={() => window.history.back()}
+            color="primary"
+            className="px-4 py-2 font-bold uppercase"
           >
             Go Back
-          </Link>
+          </Button>
         )}
       </div>
     </div>

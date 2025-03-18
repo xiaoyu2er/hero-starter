@@ -7,7 +7,6 @@ import { oneTap } from "better-auth/plugins";
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
-  
   appName: import.meta.env.VITE_APP_NAME,
   advanced: {
     cookiePrefix: import.meta.env.VITE_APP_NAME?.toLowerCase().replace(/ /g, "-"),
