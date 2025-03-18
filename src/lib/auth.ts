@@ -41,4 +41,8 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+  // https://www.better-auth.com/docs/concepts/rate-limit
+  rateLimit: {
+    storage: "database",
+  },
 });

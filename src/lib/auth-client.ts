@@ -16,9 +16,9 @@ export const authClient = createAuthClient({
       },
       // Configure prompt behavior and exponential backoff:
       promptOptions: {
-        baseDelay: 1000,   // Base delay in ms (default: 1000)
-        maxAttempts: 5     // Maximum number of attempts before triggering onPromptNotification (default: 5)
-      }
-    })
+        baseDelay: 1000, // Base delay in ms (default: 1000)
+        maxAttempts: 5, // Maximum number of attempts before triggering onPromptNotification (default: 5)
+      },
+    }),
   ]
 });
