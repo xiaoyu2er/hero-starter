@@ -26,48 +26,40 @@ function RouteComponent() {
 
   if (error || !token) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pt-6 pb-10 shadow-small">
-          <div className="mb-4 flex flex-col items-center gap-1 text-center">
-            <div className="mb-4 text-danger">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-            </div>
-            <h1 className="font-medium text-xl">Invalid Reset Link</h1>
-            <p className="mt-2 text-default-500">
-              The password reset link is invalid or has expired.
-            </p>
-          </div>
+      <div className="flex h-full w-full items-center justify-center p-4">
+        <div className="flex w-full max-w-sm flex-col items-center gap-4 rounded-large bg-content1 px-5 py-5 text-center shadow-small sm:max-w-md sm:px-8">
+          <img
+            src="/400.svg"
+            alt="Invalid link"
+            className="w-full max-w-[180px] sm:max-w-[220px]"
+          />
 
-          <div className="mb-4 rounded-lg bg-default-50 p-4">
-            <p>Please request a new password reset link to continue.</p>
-          </div>
+          <h1 className="font-medium text-lg sm:text-xl">
+            Invalid reset link
+          </h1>
 
-          <div className="flex flex-col gap-2">
-            <Button className="w-full" color="primary" as={Link} to="/login">
-              Back to Login
-            </Button>
+          <p className="text-default-500 text-sm">
+            The password reset link is invalid or has expired.
+            Please request a new password reset link to continue.
+          </p>
+
+          <div className="flex w-full gap-2">
             <Button
-              className="w-full"
+              className="flex-1"
               variant="flat"
               color="default"
               as={Link}
               to="/forgot-password"
             >
               Try Again
+            </Button>
+            <Button
+              className="flex-1"
+              color="primary"
+              as={Link}
+              to="/login"
+            >
+              Back to Login
             </Button>
           </div>
         </div>
