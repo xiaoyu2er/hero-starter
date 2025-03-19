@@ -10,15 +10,18 @@ import {
   DropdownMenu,
   Avatar,
 } from '@heroui/react';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { querySessionOptions } from '~/lib/queries/auth';
 import { AcmeIcon } from '~/components/icons/social';
 import { NotificationPopover } from './app-notification';
 import { ModeToggle } from '~/components/mode-toggle';
+import { authClient } from '~/lib/auth-client';
+import { useRouter } from '@tanstack/react-router';
 
 export function AppHeader() {
   const { data } = useSuspenseQuery(querySessionOptions);
-
+  const router = useRouter();
+  const queryClient = useQueryClient();
   return (
     <Navbar
       classNames={{
@@ -79,7 +82,15 @@ export function AppHeader() {
             <DropdownItem key="system">System</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem
+              key="logout"
+              color="danger"
+              onPress={async () => {
+                await authClient.signOut();
+                queryClient.invalidateQueries({ queryKey: ['session'] });
+                router.invalidate();
+              }}
+            >
               Log Out
             </DropdownItem>
           </DropdownMenu>
