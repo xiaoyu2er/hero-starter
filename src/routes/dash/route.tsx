@@ -1,4 +1,3 @@
-import { Button } from '@heroui/react';
 import {
   createFileRoute,
   Outlet,
@@ -6,9 +5,12 @@ import {
   useNavigate,
   useRouteContext,
 } from '@tanstack/react-router';
-import { authClient } from '~/lib/auth-client';
 import { querySessionOptions } from '~/lib/queries/auth';
 import { useQueryClient } from '@tanstack/react-query';
+
+import { AppSidebar } from '~/components/dash/app-sidebar';
+import { AppHeader } from '~/components/dash/app-header';
+import { SidebarInset, SidebarProvider } from '~/components/sidebar';
 
 export const Route = createFileRoute('/dash')({
   component: RouteComponent,
@@ -32,24 +34,18 @@ function RouteComponent() {
   const queryClient = useQueryClient();
 
   return (
-    <div>
-      <h1>Dashboard {user.email}</h1>
-      <Outlet />
-      <Button
-        color="primary"
-        onPress={() => {
-          authClient.signOut({
-            fetchOptions: {
-              onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: ['session'] });
-                navigate({ to: '/' });
-              },
-            },
-          });
-        }}
-      >
-        Logout
-      </Button>
+    <div className="[--header-height:calc(theme(spacing.14))]">
+      <SidebarProvider className="flex flex-col">
+        <AppHeader />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <SidebarInset>
+            <div className="flex-1 rounded-xl bg-muted/50 md:min-h-min">
+              <Outlet />
+            </div>
+          </SidebarInset>
+        </div>
+      </SidebarProvider>
     </div>
   );
 }
