@@ -10,7 +10,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { AppSidebar } from '~/components/dash/app-sidebar';
 import { AppHeader } from '~/components/dash/app-header';
-import { SidebarInset, SidebarProvider } from '~/components/sidebar';
+import { SidebarInset, SidebarProvider } from '~/components/ui/sidebar';
 
 export const Route = createFileRoute('/dash')({
   component: RouteComponent,
