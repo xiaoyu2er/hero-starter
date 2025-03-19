@@ -19,6 +19,7 @@ export function ModeToggle({ className }: { className?: string }) {
         <Button
           variant="light"
           isIconOnly
+          radius="full"
           aria-label="Toggle theme"
           className={cn('text-default-500', className)}
         >

@@ -13,6 +13,8 @@ import {
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { querySessionOptions } from '~/lib/queries/auth';
 import { AcmeIcon } from '~/components/icons/social';
+import { NotificationPopover } from './app-notification';
+import { ModeToggle } from '~/components/mode-toggle';
 
 export function AppHeader() {
   const { data } = useSuspenseQuery(querySessionOptions);
@@ -48,6 +50,12 @@ export function AppHeader() {
             </Link>
           </NavbarItem>
         </div>
+
+        <div>
+          <ModeToggle />
+          <NotificationPopover />
+        </div>
+
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
