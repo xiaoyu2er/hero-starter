@@ -27,7 +27,7 @@ A modern full-stack React starter template combining the power of [TanStack Star
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/hero-tanstack-app.git
+git clone git@github.com:xiaoyu2er/hero-tanstack-app.git
 cd hero-tanstack-app
 ```
 
