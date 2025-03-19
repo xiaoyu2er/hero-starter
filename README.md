@@ -58,22 +58,56 @@ If you don't have an existing PostgreSQL service, you can use Supabase local dev
 1. Initialize Supabase:
 
 ```bash
-pnpm db:init
+> hero-tanstack-app@ db:init ~/code/hero-tanstack-app
+> npx supabase init
+
+Generate VS Code settings for Deno? [y/N] n
+Generate IntelliJ Settings for Deno? [y/N] n
+Finished supabase init.
 ```
 
-2. Start the Supabase local development environment:
+During initialization, you'll be prompted about generating Deno settings. You can safely skip these by responding with `n`.
+
+2. **Optional: Optimize Supabase Configuration**
+
+   By default, Supabase enables many services that you might not need. You can optimize resource usage by editing the `supabase/config.toml` file and setting `enabled = false` for unused services:
+
+   ```toml
+   # Disable services you don't need
+   [api]
+   enabled = false  # If you don't need the REST API
+
+   [realtime]
+   enabled = false  # If you don't need realtime subscriptions
+
+   [storage]
+   enabled = false  # If you don't need file storage
+
+   [auth]
+   enabled = false  # If you're using Better-Auth instead of Supabase Auth
+
+   [edge_runtime]
+   enabled = false  # If you don't need Edge Functions
+
+   [analytics]
+   enabled = false  # If you don't need analytics
+   ```
+
+   For this project, you only need the database service, so you can disable most other services.
+
+3. Start the Supabase local development environment:
 
 ```bash
 pnpm db:start
 ```
 
-3. Generate the Prisma schema:
+4. Generate the Prisma schema:
 
 ```bash
 pnpm db:generate
 ```
 
-4. Apply the database migrations:
+5. Apply the database migrations:
 
 ```bash
 pnpm db:migrate
