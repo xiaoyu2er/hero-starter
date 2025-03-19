@@ -22,6 +22,21 @@ A modern full-stack React starter template combining the power of [TanStack Star
 - [pnpm](https://pnpm.io/) (recommended) or npm/yarn
 - [Docker](https://www.docker.com/) (for local database, optional if you have your own PostgreSQL service)
 
+### Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/hero-tanstack-app.git
+cd hero-tanstack-app
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
 ### Environment Configuration
 
 1. Copy the example environment file to create your local configuration:
