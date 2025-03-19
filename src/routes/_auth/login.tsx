@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter, useSearch } from '@tanstack/react-router';
+import { createFileRoute, useSearch } from '@tanstack/react-router';
 import { addToast } from '@heroui/react';
 import { authClient } from '~/lib/auth-client';
 import { useAppForm } from '~/components/forms';
@@ -20,7 +20,6 @@ export const Route = createFileRoute('/_auth/login')({
 });
 
 function RouteComponent() {
-  const router = useRouter();
   const { redirect } = useSearch({ from: '/_auth/login' });
   const queryClient = useQueryClient();
   const [isEmailNotVerified, setIsEmailNotVerified] = useState(false);
@@ -36,29 +35,16 @@ function RouteComponent() {
       onSubmit: zLoginSchema,
     },
     onSubmit: async ({ value }) => {
-      const { error } = await authClient.signIn.email(value);
-      console.log('~error', error);
+      const { error } = await authClient.signIn.email({
+        ...value,
+        callbackURL: redirect ?? '/dash',
+      });
+
       if (error) {
         if (error.code === 'EMAIL_NOT_VERIFIED') {
           setUserEmail(value.email);
+          setIsEmailNotVerified(true);
 
-          // Automatically send verification email when EMAIL_NOT_VERIFIED is detected
-          const verificationResult = await authClient.sendVerificationEmail({
-            email: value.email,
-            callbackURL: redirect ?? '/dash',
-          });
-
-          if (verificationResult.error) {
-            addToast({
-              title: 'Error',
-              description: verificationResult.error.message,
-              color: 'danger',
-              timeout: 3000,
-            });
-          } else {
-            // Show verification sent UI
-            setIsEmailNotVerified(true);
-          }
           return;
         }
 

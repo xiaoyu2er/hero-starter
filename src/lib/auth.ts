@@ -3,13 +3,17 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { openAPI } from "better-auth/plugins";
 import { oneTap } from "better-auth/plugins";
+import { sendVerifyEmail, sendResetPasswordEmail } from "./email";
 
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
   appName: import.meta.env.VITE_APP_NAME,
   advanced: {
-    cookiePrefix: import.meta.env.VITE_APP_NAME?.toLowerCase().replace(/ /g, "-"),
+    cookiePrefix: import.meta.env.VITE_APP_NAME?.toLowerCase().replace(
+      / /g,
+      "-"
+    ),
   },
   emailAndPassword: {
     enabled: true,
@@ -18,14 +22,16 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 128,
     autoSignIn: true,
-    sendResetPassword: async ({ user, url, token }) => {
+    sendResetPassword: async ({ user, url }) => {
       console.log("~sendResetPassword", user, url);
+      await sendResetPasswordEmail(user, url);
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
   emailVerification: {
-    sendVerificationEmail: async ({ user, url, token }) => {
-      console.log("~sendVerificationEmail", user, url);
+    sendVerificationEmail: async ({ user, url }) => {
+      console.log("~sendVerifyEmail", user.email, url);
+      await sendVerifyEmail(user, url);
     },
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
