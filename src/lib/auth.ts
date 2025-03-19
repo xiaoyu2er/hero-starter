@@ -15,6 +15,14 @@ export const auth = betterAuth({
       "-"
     ),
   },
+  // https://www.better-auth.com/docs/reference/options#account
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google", "github", "email-password"],
+      allowDifferentEmails: true,
+    },
+  },
   emailAndPassword: {
     enabled: true,
     disableSignUp: false,
