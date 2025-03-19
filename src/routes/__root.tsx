@@ -38,9 +38,9 @@ export const Route = createRootRouteWithContext<RootContext>()({
       },
       ...seo({
         title:
-          'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
+          'Hero TanStack App',
         description:
-          'TanStack Start is a type-safe, client-first, full-stack React framework. ',
+          'Hero TanStack App is a type-safe, client-first, full-stack React framework built with TanStack Start, HeroUI, and Better-Auth.',
       }),
     ],
     links: [

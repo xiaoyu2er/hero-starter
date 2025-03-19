@@ -30,13 +30,15 @@ const legal = [
 
 export const Footer = () => {
   return (
-    <footer className='mx-auto w-full max-w-7xl border-white/5 px-4 pt-16 pb-8 md:px-12 lg:mt-12 lg:px-8'>
+    <footer className="mx-auto w-full max-w-7xl border-white/5 px-4 pt-16 pb-8 md:px-12 lg:mt-12 lg:px-8">
       <div className="xl:grid xl:grid-cols-2 xl:gap-8">
         <div className="space-y-8 md:pr-8">
           <div className="flex items-center gap-3">
             <div className="flex items-center">
               <AcmeIcon />
-              <span className="font-medium text-small">{import.meta.env.VITE_APP_NAME}</span>
+              <span className="font-medium text-small">
+                {import.meta.env.VITE_APP_NAME}
+              </span>
             </div>
 
             <div className="h-4 w-divider bg-divider" />
@@ -48,8 +50,8 @@ export const Footer = () => {
           </div>
 
           <p className="text-default-600 text-small">
-            © {new Date().getFullYear()} Hero TanStack Starter- Building the
-            future of development
+            © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME} -
+            Building the future of development
           </p>
 
           <div className="flex space-x-6">
@@ -134,7 +136,7 @@ export const Footer = () => {
               ))}
             </ul>
 
-            <h3 className='mt-8 font-semibold text-default-800 text-small'>
+            <h3 className="mt-8 font-semibold text-default-800 text-small">
               Legal
             </h3>
             <ul className="mt-2 space-y-1.5">

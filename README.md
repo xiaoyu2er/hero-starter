@@ -1,4 +1,4 @@
-# Hero Starter
+# Hero TanStack App
 
 A modern full-stack React starter template combining the power of [TanStack Start](https://tanstack.com/start/latest), [HeroUI](https://www.heroui.com/), and [Better-Auth](https://www.better-auth.com/).
 
@@ -10,6 +10,6 @@ A modern full-stack React starter template combining the power of [TanStack Star
 - **Type-safe** - End-to-end type safety with TypeScript
 - **Deployment ready** - Easy deployment to Vercel and Netlify
 
-## 🔍 Live Demos
+## 🔍 Live Demo
 
-- [Vercel Demo](https://hero-starter.vercel.app/)
+- [Demo](https://hero.tanstack.app)

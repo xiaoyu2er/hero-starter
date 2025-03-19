@@ -16,7 +16,7 @@ export default function HomeHero() {
       >
         🚀
         <Divider className="mx-2 h-3" orientation="vertical" />
-        Introducing Hero Starter!
+        Introducing Hero TanStack App!
       </Button>
 
       <div className="flex flex-col items-center gap-8 px-4 text-center">
@@ -24,7 +24,7 @@ export default function HomeHero() {
           <span className="bg-gradient-to-r from-primary-500 to-cyan-500 bg-clip-text text-transparent">
             Hero
           </span>
-          <span>Starter</span>
+          <span>TanStack App</span>
         </h1>
         <div className='animate-bounce whitespace-nowrap rounded-md bg-black px-2 py-1 align-super font-black text-white text-xs uppercase leading-none shadow-black/30 shadow-sm md:text-base dark:bg-white dark:text-black'>
           Status: Alpha
