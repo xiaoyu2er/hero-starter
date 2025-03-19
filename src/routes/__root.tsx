@@ -25,10 +25,7 @@ type RootContext = {
 
 export const Route = createRootRouteWithContext<RootContext>()({
   loader: ({ context }) => {
-    const $auth = context.queryClient.fetchQuery(querySessionOptions);
-    return {
-      $auth,
-    };
+    context.queryClient.prefetchQuery(querySessionOptions);
   },
   head: () => ({
     meta: [
