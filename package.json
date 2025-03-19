@@ -10,10 +10,13 @@
     "start": "vinxi start",
     "lint": "ultracite lint",
     "format": "ultracite format",
-    "generate": "npx @better-auth/cli generate --output ./prisma/schema.prisma --config ./src/lib/auth.ts",
-    "migrate": "npx prisma format && npx prisma generate && npx prisma db push",
-    "migrate:prod": "dotenv -e .env.prod -- npx prisma db push deploy",
-    "email:dev": "email dev --dir src/emails --port 7006"
+    "email:dev": "email dev --dir src/emails --port 7006",
+    "db:generate": "npx @better-auth/cli generate --output ./prisma/schema.prisma --config ./src/lib/auth.ts",
+    "db:migrate": "npx prisma format && npx prisma generate && npx prisma db push",
+    "db:migrate:prod": "dotenv -e .env.prod -- npx prisma db push deploy",
+    "db:init": "npx supabase init",
+    "db:start": "npx supabase start",
+    "db:stop": "npx supabase stop"
   },
   "dependencies": {
     "@heroui/react": "^2.7.5",
