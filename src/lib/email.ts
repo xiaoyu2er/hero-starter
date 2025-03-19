@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import ResetPasswordTemplate from "~/emails/rest-password";
 import VerifyEmailTemplate from "~/emails/verify-email";
+import { v4 as uuid } from 'uuid';
 
 export async function sendVerifyEmail(
   user: { name: string; email: string },
@@ -15,12 +16,17 @@ export async function sendVerifyEmail(
   const { data, error } = await resend.emails.send({
     from: process.env.EMAIL_FROM ?? "",
     to: [user.email],
-    subject: "Verify your code",
+    subject: "Verify your email address",
     react: VerifyEmailTemplate({
       email: user.email,
       url,
       appName: import.meta.env.VITE_APP_NAME ?? "",
     }),
+    headers: {
+      // https://github.com/resend/resend-examples/tree/main/with-prevent-thread-on-gmail
+      // send Resend emails with prevent thread on Gmail
+      'X-Entity-Ref-ID': uuid(),
+    },
   });
 
   if (error) {
@@ -48,6 +54,9 @@ export async function sendResetPasswordEmail(
       url,
       appName: import.meta.env.VITE_APP_NAME ?? "",
     }),
+    headers: {
+      'X-Entity-Ref-ID': uuid(),
+    },
   });
 
   if (error) {
