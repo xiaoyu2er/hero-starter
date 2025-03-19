@@ -9,13 +9,18 @@ import { OauthButtons } from '~/components/auth/oauth-buttons';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link } from '~/components/Link';
 import { useState } from 'react';
+import { useSearch } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_auth/sign-up')({
   component: RouteComponent,
+  validateSearch: (search) => {
+    return search as { redirect?: string };
+  },
 });
 
 function RouteComponent() {
   const queryClient = useQueryClient();
+  const { redirect } = useSearch({ from: '/_auth/sign-up' });
   const [isRegistered, setIsRegistered] = useState(false);
   const [userEmail, setUserEmail] = useState('');
 
@@ -32,7 +37,7 @@ function RouteComponent() {
     onSubmit: async ({ value }) => {
       const { error } = await authClient.signUp.email({
         ...value,
-        callbackURL: '/dash',
+        callbackURL: redirect ?? '/dash',
       });
 
       if (error) {
@@ -116,7 +121,9 @@ function RouteComponent() {
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pt-6 pb-10 shadow-small">
         <div className="flex flex-col gap-1">
           <h1 className="font-medium text-large">Sign up</h1>
-          <p className="text-default-500 text-small">to continue to {import.meta.env.VITE_APP_NAME}</p>
+          <p className="text-default-500 text-small">
+            to continue to {import.meta.env.VITE_APP_NAME}
+          </p>
         </div>
         <OauthButtons />
         <DividerOr />

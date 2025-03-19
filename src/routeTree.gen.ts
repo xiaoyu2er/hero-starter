@@ -19,6 +19,7 @@ import { Route as DashIndexImport } from './routes/dash/index'
 import { Route as WwwIndexImport } from './routes/_www/index'
 import { Route as LegalTermsImport } from './routes/legal/terms'
 import { Route as LegalPrivacyImport } from './routes/legal/privacy'
+import { Route as DashAImport } from './routes/dash/a'
 import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
 import { Route as AuthResetPasswordImport } from './routes/_auth/reset-password'
 import { Route as AuthLoginImport } from './routes/_auth/login'
@@ -70,6 +71,12 @@ const LegalPrivacyRoute = LegalPrivacyImport.update({
   id: '/legal/privacy',
   path: '/legal/privacy',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashARoute = DashAImport.update({
+  id: '/a',
+  path: '/a',
+  getParentRoute: () => DashRouteRoute,
 } as any)
 
 const AuthSignUpRoute = AuthSignUpImport.update({
@@ -156,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignUpImport
       parentRoute: typeof AuthRouteImport
     }
+    '/dash/a': {
+      id: '/dash/a'
+      path: '/a'
+      fullPath: '/dash/a'
+      preLoaderRoute: typeof DashAImport
+      parentRoute: typeof DashRouteImport
+    }
     '/legal/privacy': {
       id: '/legal/privacy'
       path: '/legal/privacy'
@@ -220,10 +234,12 @@ const WwwRouteRouteWithChildren = WwwRouteRoute._addFileChildren(
 )
 
 interface DashRouteRouteChildren {
+  DashARoute: typeof DashARoute
   DashIndexRoute: typeof DashIndexRoute
 }
 
 const DashRouteRouteChildren: DashRouteRouteChildren = {
+  DashARoute: DashARoute,
   DashIndexRoute: DashIndexRoute,
 }
 
@@ -239,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
   '/': typeof WwwIndexRoute
@@ -252,6 +269,7 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
   '/': typeof WwwIndexRoute
@@ -268,6 +286,7 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
+  '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
   '/_www/': typeof WwwIndexRoute
@@ -284,6 +303,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/sign-up'
+    | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
     | '/'
@@ -296,6 +316,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/sign-up'
+    | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
     | '/'
@@ -310,6 +331,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/reset-password'
     | '/_auth/sign-up'
+    | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
     | '/_www/'
@@ -371,6 +393,7 @@ export const routeTree = rootRoute
     "/dash": {
       "filePath": "dash/route.tsx",
       "children": [
+        "/dash/a",
         "/dash/"
       ]
     },
@@ -392,6 +415,10 @@ export const routeTree = rootRoute
     "/_auth/sign-up": {
       "filePath": "_auth/sign-up.tsx",
       "parent": "/_auth"
+    },
+    "/dash/a": {
+      "filePath": "dash/a.tsx",
+      "parent": "/dash"
     },
     "/legal/privacy": {
       "filePath": "legal/privacy.tsx"

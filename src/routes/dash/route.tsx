@@ -12,10 +12,15 @@ import { useQueryClient } from '@tanstack/react-query';
 
 export const Route = createFileRoute('/dash')({
   component: RouteComponent,
-  beforeLoad: async ({ context }) => {
+  beforeLoad: async ({ context, location }) => {
     const session = await context.queryClient.fetchQuery(querySessionOptions);
     if (!session?.session) {
-      throw redirect({ to: '/login' });
+      throw redirect({
+        to: '/login',
+        search: {
+          redirect: location.href,
+        },
+      });
     }
     return session;
   },

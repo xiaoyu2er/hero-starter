@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, useRouter, useSearch } from '@tanstack/react-router';
 import { addToast } from '@heroui/react';
 import { authClient } from '~/lib/auth-client';
 import { useAppForm } from '~/components/forms';
@@ -13,10 +13,15 @@ import { Button } from '@heroui/react';
 
 export const Route = createFileRoute('/_auth/login')({
   component: RouteComponent,
+  validateSearch: (search) => {
+    console.log('~search', search);
+    return search as { redirect?: string };
+  },
 });
 
 function RouteComponent() {
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { redirect } = useSearch({ from: '/_auth/login' });
   const queryClient = useQueryClient();
   const [isEmailNotVerified, setIsEmailNotVerified] = useState(false);
   const [userEmail, setUserEmail] = useState('');
@@ -36,13 +41,13 @@ function RouteComponent() {
       if (error) {
         if (error.code === 'EMAIL_NOT_VERIFIED') {
           setUserEmail(value.email);
-          
+
           // Automatically send verification email when EMAIL_NOT_VERIFIED is detected
           const verificationResult = await authClient.sendVerificationEmail({
             email: value.email,
-            callbackURL: '/dash',
+            callbackURL: redirect ?? '/dash',
           });
-          
+
           if (verificationResult.error) {
             addToast({
               title: 'Error',
@@ -72,7 +77,6 @@ function RouteComponent() {
         timeout: 3000,
       });
       queryClient.invalidateQueries({ queryKey: ['session'] });
-      navigate({ to: '/dash' });
     },
   });
 
@@ -136,7 +140,9 @@ function RouteComponent() {
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pt-6 pb-10 shadow-small">
         <div className="flex flex-col gap-1">
           <h1 className="font-medium text-large">Sign in</h1>
-          <p className="text-default-500 text-small">to continue to {import.meta.env.VITE_APP_NAME}</p>
+          <p className="text-default-500 text-small">
+            to continue to {import.meta.env.VITE_APP_NAME}
+          </p>
         </div>
         <OauthButtons />
         <DividerOr />
@@ -188,7 +194,7 @@ function RouteComponent() {
         </Form>
         <p className="text-center text-small">
           Need to create an account?&nbsp;
-          <Link to="/sign-up" size="sm">
+          <Link to="/sign-up" search={{ redirect }} size="sm">
             Sign Up
           </Link>
         </p>
