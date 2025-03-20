@@ -6,8 +6,8 @@ import {
   useSearch,
 } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-adapter';
-import { Link } from '~/components/Link';
 import { useAppForm } from '~/components/forms';
+import { Link } from '~/components/link';
 import { authClient } from '~/lib/auth-client';
 import {
   zResetPasswordSchema,

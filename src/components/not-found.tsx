@@ -1,7 +1,7 @@
-import { Link, useRouter } from '@tanstack/react-router';
 import { Button, Divider, Image } from '@heroui/react';
+import { Link, type ReactNode, useRouter } from '@tanstack/react-router';
 
-export function NotFound({ children }: { children?: React.ReactNode }) {
+export function NotFound({ children }: { children?: ReactNode }) {
   const router = useRouter();
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center py-8 text-center">
@@ -15,11 +15,7 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
           </p>
         )}
       </div>
-      <Image
-        src="/404.svg"
-        alt="404"
-        className="mx-auto h-auto w-96"
-      />
+      <Image src="/404.svg" alt="404" className="mx-auto h-auto w-96" />
 
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button

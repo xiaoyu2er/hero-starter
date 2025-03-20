@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { zEmail, zPassword } from "./common";
+import { z } from 'zod';
+import { zEmail, zPassword } from './common';
 
 export const zLoginSchema = z.object({
   email: zEmail,
@@ -12,7 +12,7 @@ export const zSignUpSchema = z.object({
   password: zPassword,
   name: z.string().min(1),
   acceptTerms: z.boolean().refine((val) => val, {
-    message: "You must accept the terms and conditions",
+    message: 'You must accept the terms and conditions',
   }),
 });
 
@@ -27,5 +27,5 @@ export const zResetPasswordSearchSchema = z.object({
 
 export const zResetPasswordSchema = z.object({
   newPassword: zPassword,
-  token: z.string().min(1, "Token is required"),
+  token: z.string().min(1, 'Token is required'),
 });

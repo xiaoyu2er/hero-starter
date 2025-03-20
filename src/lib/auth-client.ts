@@ -1,5 +1,5 @@
-import { createAuthClient } from "better-auth/react";
-import { oneTapClient } from "better-auth/client/plugins";
+import { oneTapClient } from 'better-auth/client/plugins';
+import { createAuthClient } from 'better-auth/react';
 
 export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
@@ -9,7 +9,7 @@ export const authClient = createAuthClient({
       // Optional client configuration:
       autoSelect: false,
       cancelOnTapOutside: true,
-      context: "signin",
+      context: 'signin',
       additionalOptions: {
         // Any extra options for the Google initialize method
       },
@@ -19,5 +19,5 @@ export const authClient = createAuthClient({
         maxAttempts: 5, // Maximum number of attempts before triggering onPromptNotification (default: 5)
       },
     }),
-  ]
+  ],
 });

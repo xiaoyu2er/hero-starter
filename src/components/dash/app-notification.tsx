@@ -1,19 +1,19 @@
-import type React from 'react';
-import { useState, forwardRef } from 'react';
 import {
+  Avatar,
   Badge,
   Button,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   Card,
   CardBody,
   CardHeader,
-  Avatar,
-  Tabs,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Tab,
+  Tabs,
 } from '@heroui/react';
 import { BellIcon, MailCheckIcon } from 'lucide-react';
+import type React from 'react';
+import { forwardRef, useState } from 'react';
 
 // Define notification type
 export type NotificationType =

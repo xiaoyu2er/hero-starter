@@ -1,7 +1,9 @@
 import type { NavbarProps } from '@heroui/react';
 
-import React from 'react';
 import {
+  Button,
+  Divider,
+  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -9,18 +11,16 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  Link,
-  Button,
-  Divider,
   cn,
 } from '@heroui/react';
 import { Icon } from '@iconify/react';
+import React from 'react';
 
-import { AcmeIcon } from './icons/social';
-import { ModeToggle } from '~/components/mode-toggle';
-import { querySessionOptions } from '~/lib/queries/auth';
 import { useQuery } from '@tanstack/react-query';
 import { Link as RouterLink } from '@tanstack/react-router';
+import { ModeToggle } from '~/components/mode-toggle';
+import { querySessionOptions } from '~/lib/queries/auth';
+import { AcmeIcon } from './icons/social';
 
 const menuItems = [
   'About',
@@ -102,12 +102,7 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
         <NavbarContent className="hidden md:flex" justify="end">
           <NavbarItem className="!flex ml-2 items-center gap-2">
             {!isLoading && !data?.session && (
-              <Button
-                color="primary"
-                size="sm"
-                as={RouterLink}
-                to="/login"
-              >
+              <Button color="primary" size="sm" as={RouterLink} to="/login">
                 Login
               </Button>
             )}

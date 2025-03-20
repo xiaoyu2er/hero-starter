@@ -16,8 +16,7 @@ function Home() {
   const queryClient = useQueryClient();
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if(!isLoading && !data?.session) {
-      console.log('~init one tap');
+    if (!isLoading && !data?.session) {
       authClient.oneTap({
         fetchOptions: {
           onSuccess: () => {
@@ -32,7 +31,6 @@ function Home() {
         },
       });
     }
-    
   }, [isLoading, data?.session]);
 
   return <HomeHero />;

@@ -3,13 +3,13 @@ import {
   Container,
   Head,
   Heading,
+  Hr,
   Html,
+  Link,
   Preview,
   Section,
   Tailwind,
   Text,
-  Link,
-  Hr,
 } from '@react-email/components';
 import Footer from './components/footer';
 
@@ -34,9 +34,10 @@ export default function ResetPasswordTemplate({
             <Heading className="mx-0 my-7 p-0 text-center font-semibold text-black text-xl">
               Reset your password
             </Heading>
-            
+
             <Text className="text-black text-sm leading-6">
-              You recently requested to reset your password for your {appName} account. Use the button below to reset it.
+              You recently requested to reset your password for your {appName}{' '}
+              account. Use the button below to reset it.
             </Text>
 
             <Section className="my-8 text-center">
@@ -47,23 +48,24 @@ export default function ResetPasswordTemplate({
                 Reset Password
               </Link>
             </Section>
-            
+
             <Text className="text-black text-sm leading-6">
               Or, you can copy and paste this URL into your browser:
             </Text>
-            
+
             <Text className="max-w-sm flex-wrap break-words font-medium text-purple-600 no-underline">
               {url}
             </Text>
-            
+
             <Hr className="my-4" />
-            
+
             <Text className="text-center text-gray-500 text-sm">
               This password reset link is valid for 1 hour
             </Text>
-            
+
             <Text className="text-center text-gray-500 text-sm">
-              If you didn't request a password reset, you can safely ignore this email.
+              If you didn't request a password reset, you can safely ignore this
+              email.
             </Text>
 
             <Footer email={email} />
@@ -78,4 +80,4 @@ ResetPasswordTemplate.PreviewProps = {
   email: 'test@example.com',
   url: 'https://example.com/reset-password',
   appName: 'Acme',
-} as ResetPasswordTemplateProps; 
+} as ResetPasswordTemplateProps;

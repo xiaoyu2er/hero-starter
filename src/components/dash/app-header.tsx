@@ -1,22 +1,22 @@
 import {
+  Avatar,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
 } from '@heroui/react';
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { querySessionOptions } from '~/lib/queries/auth';
+import { useRouter } from '@tanstack/react-router';
 import { AcmeIcon } from '~/components/icons/social';
-import { NotificationPopover } from './app-notification';
 import { ModeToggle } from '~/components/mode-toggle';
 import { authClient } from '~/lib/auth-client';
-import { useRouter } from '@tanstack/react-router';
+import { querySessionOptions } from '~/lib/queries/auth';
+import { NotificationPopover } from './app-notification';
 
 export function AppHeader() {
   const { data } = useSuspenseQuery(querySessionOptions);

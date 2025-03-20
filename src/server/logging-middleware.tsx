@@ -1,7 +1,7 @@
 import { createMiddleware } from '@tanstack/react-start';
 
 const preLogMiddleware = createMiddleware()
-  .client(async (ctx) => {
+  .client((ctx) => {
     const clientTime = new Date();
 
     return ctx.next({
@@ -13,7 +13,7 @@ const preLogMiddleware = createMiddleware()
       },
     });
   })
-  .server(async (ctx) => {
+  .server((ctx) => {
     const serverTime = new Date();
 
     return ctx.next({
@@ -31,6 +31,8 @@ export const logMiddleware = createMiddleware()
     const res = await ctx.next();
 
     const now = new Date();
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    // biome-ignore lint/suspicious/noConsole: <explanation>
     console.log('Client Req/Res:', {
       duration: res.context.clientTime.getTime() - now.getTime(),
       durationToServer: res.context.durationToServer,

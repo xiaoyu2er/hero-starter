@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   HeadContent,
   Outlet,
@@ -5,18 +6,17 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import type * as React from 'react';
-import { NotFound } from '~/components/NotFound';
-import { RootProviders } from '~/components/RootProviders';
-// @ts-ignore
-import appCss from '~/styles/app.css?url';
-import { seo } from '~/lib/seo';
 import type { QueryClient } from '@tanstack/react-query';
+import type * as React from 'react';
+import { DefaultCatchBoundary } from '~/components/default-catch-boundary';
+import { NotFound } from '~/components/not-found';
+import { RootProviders } from '~/components/root-providers';
 import { cn } from '~/lib/cn';
 import { querySessionOptions } from '~/lib/queries/auth';
-import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
+import { seo } from '~/lib/seo';
+// @ts-ignore
+import appCss from '~/styles/app.css?url';
 
 type RootContext = {
   queryClient: QueryClient;
@@ -37,8 +37,7 @@ export const Route = createRootRouteWithContext<RootContext>()({
         content: 'width=device-width, initial-scale=1',
       },
       ...seo({
-        title:
-          'Hero TanStack App',
+        title: 'Hero TanStack App',
         description:
           'Hero TanStack App is a type-safe, client-first, full-stack React framework built with TanStack Start, HeroUI, and Better-Auth.',
       }),

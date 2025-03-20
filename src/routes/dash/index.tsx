@@ -121,7 +121,9 @@ function RouteComponent() {
                 <p className="font-bold text-tiny text-white/60 uppercase">
                   New Feature
                 </p>
-                <h4 className="font-medium text-2xl text-white">AI Assistant</h4>
+                <h4 className="font-medium text-2xl text-white">
+                  AI Assistant
+                </h4>
               </CardHeader>
               <Image
                 removeWrapper

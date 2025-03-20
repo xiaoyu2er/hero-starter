@@ -1,10 +1,10 @@
 import { createFormHook } from '@tanstack/react-form';
 
+import { CheckboxField } from './checkbox-field';
 import { fieldContext, formContext } from './form-context';
 import { InputField } from './input-field';
-import SubmitButton from './submit-button';
 import { PasswordField } from './password-field';
-import { CheckboxField } from './checkbox-field';
+import SubmitButton from './submit-button';
 export const { useAppForm } = createFormHook({
   fieldContext,
   formContext,

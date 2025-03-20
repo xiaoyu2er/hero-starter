@@ -1,15 +1,8 @@
-import {
-  createFileRoute,
-  Outlet,
-  redirect,
-  useNavigate,
-  useRouteContext,
-} from '@tanstack/react-router';
+import { Outlet, createFileRoute, redirect } from '@tanstack/react-router';
 import { querySessionOptions } from '~/lib/queries/auth';
-import { useQueryClient } from '@tanstack/react-query';
 
-import { AppSidebar } from '~/components/dash/app-sidebar';
 import { AppHeader } from '~/components/dash/app-header';
+import { AppSidebar } from '~/components/dash/app-sidebar';
 import { SidebarInset, SidebarProvider } from '~/components/ui/sidebar';
 
 export const Route = createFileRoute('/dash')({
@@ -29,10 +22,6 @@ export const Route = createFileRoute('/dash')({
 });
 
 function RouteComponent() {
-  const { user } = useRouteContext({ from: '/dash' });
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
       <SidebarProvider className="flex flex-col">

@@ -5,12 +5,18 @@
     "globals": [""]
   },
   "files": {
-    "ignore": [".vinxi/**", "node_modules/**"]
+    "ignore": [".vinxi/**", "node_modules/**", "src/routeTree.gen.ts"]
   },
   "linter": {
     "rules": {
       "correctness": {
         "noChildrenProp": "off"
+      },
+      "nursery": {
+        "noHeadElement": "off"
+      },
+      "style": {
+        "useFilenamingConvention": "warn"
       }
     }
   }

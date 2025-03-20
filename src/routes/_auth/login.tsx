@@ -1,13 +1,13 @@
-import { addToast, Image } from '@heroui/react';
+import { Image, addToast } from '@heroui/react';
 import { Form } from '@heroui/react';
 import { Button } from '@heroui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useSearch } from '@tanstack/react-router';
 import { useState } from 'react';
-import { Link } from '~/components/Link';
 import { DividerOr } from '~/components/auth/divider-or';
 import { OauthButtons } from '~/components/auth/oauth-buttons';
 import { useAppForm } from '~/components/forms';
+import { Link } from '~/components/link';
 import { authClient } from '~/lib/auth-client';
 import { getMailLink } from '~/lib/email';
 import { zLoginSchema } from '~/lib/zod/auth';

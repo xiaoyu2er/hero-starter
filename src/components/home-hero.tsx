@@ -1,6 +1,6 @@
 import { Button, Divider } from '@heroui/react';
-import { ChevronRight } from 'lucide-react';
 import { Link as RouterLink } from '@tanstack/react-router';
+import { ChevronRight } from 'lucide-react';
 
 export default function HomeHero() {
   return (

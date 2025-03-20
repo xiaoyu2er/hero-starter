@@ -1,11 +1,11 @@
 import { Button, Drawer, DrawerContent } from '@heroui/react';
 import { Skeleton, Tooltip } from '@heroui/react';
-import { cn } from '~/lib/cn';
-import { useScreenSize } from '~/hooks/use-screen-size';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeft } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
+import { useScreenSize } from '~/hooks/use-screen-size';
+import { cn } from '~/lib/cn';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -71,12 +71,14 @@ const SidebarProvider = React.forwardRef<
         }
 
         // This sets the cookie to keep the sidebar state.
+        // biome-ignore lint/nursery/noDocumentCookie: <explanation>
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       },
       [setOpenProp, open]
     );
 
     // Helper to toggle the sidebar.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     const toggleSidebar = useCallback(() => {
       return isMobile
         ? setOpenMobile((open) => !open)
@@ -103,6 +105,7 @@ const SidebarProvider = React.forwardRef<
     // This makes it easier to style the sidebar with Tailwind classes.
     const state = open ? 'expanded' : 'collapsed';
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     const contextValue = useMemo<SidebarContext>(
       () => ({
         state,

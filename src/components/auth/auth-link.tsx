@@ -1,7 +1,7 @@
 import { cn } from '@heroui/react';
 import type {} from 'react';
-import { Link } from '~/components/Link';
-import type { LinkType } from '~/components/Link';
+import { Link } from '~/components/link';
+import type { LinkType } from '~/components/link';
 
 export const AuthLink: LinkType = ({ to, children, className, onPress }) => {
   return (

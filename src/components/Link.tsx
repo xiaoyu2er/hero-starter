@@ -1,8 +1,8 @@
-import React from 'react';
-import { createLink } from '@tanstack/react-router';
 import { Link } from '@heroui/react';
 import type { LinkProps } from '@heroui/react';
+import { createLink } from '@tanstack/react-router';
 import type { LinkComponent } from '@tanstack/react-router';
+import React from 'react';
 
 interface HeroLinkProps extends LinkProps {
   // Add any additional props you want to pass to the Link

@@ -1,6 +1,5 @@
-
 import type { FC } from 'react';
-import { Link } from '~/components/Link';
+import { Link } from '~/components/link';
 
 export const TermsPrivacy: FC = () => {
   return (

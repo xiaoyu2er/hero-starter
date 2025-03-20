@@ -1,9 +1,9 @@
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
-import { openAPI } from "better-auth/plugins";
-import { oneTap } from "better-auth/plugins";
-import { sendVerifyEmail, sendResetPasswordEmail } from "./email";
+import { PrismaClient } from '@prisma/client';
+import { betterAuth } from 'better-auth';
+import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { openAPI } from 'better-auth/plugins';
+import { oneTap } from 'better-auth/plugins';
+import { sendResetPasswordEmail, sendVerifyEmail } from './email';
 
 const prisma = new PrismaClient();
 
@@ -12,14 +12,14 @@ export const auth = betterAuth({
   advanced: {
     cookiePrefix: import.meta.env.VITE_APP_NAME?.toLowerCase().replace(
       / /g,
-      "-"
+      '-'
     ),
   },
   // https://www.better-auth.com/docs/reference/options#account
   account: {
     accountLinking: {
       enabled: true,
-      trustedProviders: ["google", "github", "email-password"],
+      trustedProviders: ['google', 'github', 'email-password'],
       allowDifferentEmails: true,
     },
   },
@@ -31,14 +31,18 @@ export const auth = betterAuth({
     maxPasswordLength: 128,
     autoSignIn: true,
     sendResetPassword: async ({ user, url }) => {
-      console.log("~sendResetPassword", user, url);
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+      // biome-ignore lint/suspicious/noConsole: <explanation>
+      console.log('~sendResetPassword', user, url);
       await sendResetPasswordEmail(user, url);
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      console.log("~sendVerifyEmail", user.email, url);
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+      // biome-ignore lint/suspicious/noConsole: <explanation>
+      console.log('~sendVerifyEmail', user.email, url);
       await sendVerifyEmail(user, url);
     },
     sendOnSignUp: true,
@@ -46,7 +50,7 @@ export const auth = betterAuth({
     expiresIn: 3600, // 1 hour
   },
   database: prismaAdapter(prisma, {
-    provider: "postgresql",
+    provider: 'postgresql',
   }),
   plugins: [openAPI(), oneTap()],
   socialProviders: {
@@ -61,6 +65,6 @@ export const auth = betterAuth({
   },
   // https://www.better-auth.com/docs/concepts/rate-limit
   rateLimit: {
-    storage: "database",
+    storage: 'database',
   },
 });

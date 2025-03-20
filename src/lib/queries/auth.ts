@@ -1,7 +1,7 @@
-import { queryOptions } from "@tanstack/react-query";
-import { getSession } from "~/server/auth";
+import { queryOptions } from '@tanstack/react-query';
+import { getSession } from '~/server/auth';
 
 export const querySessionOptions = queryOptions({
-    queryKey: ['session'],
-    queryFn: () => getSession(),
-  })
+  queryKey: ['session'],
+  queryFn: () => getSession(),
+});
