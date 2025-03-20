@@ -28,7 +28,7 @@ function RouteComponent() {
         <Image
           removeWrapper
           alt="Analytics dashboard background"
-          className="z-0 rounded-none object-cover"
+          className="z-0 h-full w-full rounded-none object-cover"
           src="https://images.pexels.com/photos/3030268/pexels-photo-3030268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         />
         <CardFooter className="absolute bottom-0 z-10 border-default-600 border-t-1 bg-black/40 dark:border-default-100">
