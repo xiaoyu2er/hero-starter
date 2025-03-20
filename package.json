@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npx prisma generate",
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build:vercel": "vinxi build --preset vercel",
     "start": "vinxi start",
     "lint": "ultracite lint",
     "format": "ultracite format",
