@@ -8,8 +8,9 @@
     "dev": "vinxi dev",
     "build:vercel": "vinxi build --preset vercel",
     "start": "vinxi start",
-    "lint": "ultracite lint",
-    "format": "ultracite format",
+    "format": "biome format . --write",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --apply",
     "email:dev": "email dev --dir src/emails --port 7006",
     "db:generate": "npx @better-auth/cli generate --output ./prisma/schema.prisma --config ./src/lib/auth.ts",
     "db:migrate": "npx prisma format && npx prisma generate && npx prisma db push",
@@ -65,5 +66,9 @@
     "typescript": "^5.7.2",
     "ultracite": "^4.1.21",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
   }
 }
