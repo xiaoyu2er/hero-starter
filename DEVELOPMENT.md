@@ -5,6 +5,7 @@
 - [Node.js](https://nodejs.org/) (v18+)
 - [pnpm](https://pnpm.io/) (recommended) or npm/yarn
 - [Docker](https://www.docker.com/) (for local database, optional if you have your own PostgreSQL service)
+- [pre-commit](https://pre-commit.com/) (for Git hooks)
 
 ## Getting Started
 
@@ -129,6 +130,36 @@ pnpm dev
 
 Your application should now be running at [http://localhost:3000](http://localhost:3000).
 
+## Pre-commit Hooks Setup
+
+This project uses [pre-commit](https://pre-commit.com/) to enforce code quality checks before each commit. Please set up pre-commit hooks before making any pull requests.
+
+1. Install pre-commit:
+
+```bash
+pip install pre-commit
+```
+
+Or if you prefer:
+
+```bash
+brew install pre-commit
+```
+
+2. Install the git hook scripts:
+
+```bash
+pre-commit install
+```
+
+3. The hooks will run automatically on `git commit`, but you can also run them manually:
+
+```bash
+pre-commit run --all-files
+```
+
+> **IMPORTANT**: Always ensure pre-commit hooks pass successfully before creating a pull request.
+
 ## Additional Commands
 
 - Stop the Supabase development environment:
@@ -147,4 +178,4 @@ Your application should now be running at [http://localhost:3000](http://localho
   ```bash
   pnpm build
   ```
-``` 
+```
