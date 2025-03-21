@@ -20,6 +20,9 @@ import { Route as WwwIndexImport } from './routes/_www/index'
 import { Route as LegalTermsImport } from './routes/legal/terms'
 import { Route as LegalPrivacyImport } from './routes/legal/privacy'
 import { Route as DashAImport } from './routes/dash/a'
+import { Route as WwwPricingImport } from './routes/_www/pricing'
+import { Route as WwwDocsImport } from './routes/_www/docs'
+import { Route as WwwAboutUsImport } from './routes/_www/about-us'
 import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
 import { Route as AuthResetPasswordImport } from './routes/_auth/reset-password'
 import { Route as AuthLoginImport } from './routes/_auth/login'
@@ -77,6 +80,24 @@ const DashARoute = DashAImport.update({
   id: '/a',
   path: '/a',
   getParentRoute: () => DashRouteRoute,
+} as any)
+
+const WwwPricingRoute = WwwPricingImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => WwwRouteRoute,
+} as any)
+
+const WwwDocsRoute = WwwDocsImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => WwwRouteRoute,
+} as any)
+
+const WwwAboutUsRoute = WwwAboutUsImport.update({
+  id: '/about-us',
+  path: '/about-us',
+  getParentRoute: () => WwwRouteRoute,
 } as any)
 
 const AuthSignUpRoute = AuthSignUpImport.update({
@@ -163,6 +184,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignUpImport
       parentRoute: typeof AuthRouteImport
     }
+    '/_www/about-us': {
+      id: '/_www/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof WwwAboutUsImport
+      parentRoute: typeof WwwRouteImport
+    }
+    '/_www/docs': {
+      id: '/_www/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof WwwDocsImport
+      parentRoute: typeof WwwRouteImport
+    }
+    '/_www/pricing': {
+      id: '/_www/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof WwwPricingImport
+      parentRoute: typeof WwwRouteImport
+    }
     '/dash/a': {
       id: '/dash/a'
       path: '/a'
@@ -222,10 +264,16 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 )
 
 interface WwwRouteRouteChildren {
+  WwwAboutUsRoute: typeof WwwAboutUsRoute
+  WwwDocsRoute: typeof WwwDocsRoute
+  WwwPricingRoute: typeof WwwPricingRoute
   WwwIndexRoute: typeof WwwIndexRoute
 }
 
 const WwwRouteRouteChildren: WwwRouteRouteChildren = {
+  WwwAboutUsRoute: WwwAboutUsRoute,
+  WwwDocsRoute: WwwDocsRoute,
+  WwwPricingRoute: WwwPricingRoute,
   WwwIndexRoute: WwwIndexRoute,
 }
 
@@ -255,6 +303,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/about-us': typeof WwwAboutUsRoute
+  '/docs': typeof WwwDocsRoute
+  '/pricing': typeof WwwPricingRoute
   '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
@@ -269,6 +320,9 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/about-us': typeof WwwAboutUsRoute
+  '/docs': typeof WwwDocsRoute
+  '/pricing': typeof WwwPricingRoute
   '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
@@ -286,6 +340,9 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
+  '/_www/about-us': typeof WwwAboutUsRoute
+  '/_www/docs': typeof WwwDocsRoute
+  '/_www/pricing': typeof WwwPricingRoute
   '/dash/a': typeof DashARoute
   '/legal/privacy': typeof LegalPrivacyRoute
   '/legal/terms': typeof LegalTermsRoute
@@ -303,6 +360,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/sign-up'
+    | '/about-us'
+    | '/docs'
+    | '/pricing'
     | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
@@ -316,6 +376,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/sign-up'
+    | '/about-us'
+    | '/docs'
+    | '/pricing'
     | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
@@ -331,6 +394,9 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/reset-password'
     | '/_auth/sign-up'
+    | '/_www/about-us'
+    | '/_www/docs'
+    | '/_www/pricing'
     | '/dash/a'
     | '/legal/privacy'
     | '/legal/terms'
@@ -387,6 +453,9 @@ export const routeTree = rootRoute
     "/_www": {
       "filePath": "_www/route.tsx",
       "children": [
+        "/_www/about-us",
+        "/_www/docs",
+        "/_www/pricing",
         "/_www/"
       ]
     },
@@ -415,6 +484,18 @@ export const routeTree = rootRoute
     "/_auth/sign-up": {
       "filePath": "_auth/sign-up.tsx",
       "parent": "/_auth"
+    },
+    "/_www/about-us": {
+      "filePath": "_www/about-us.tsx",
+      "parent": "/_www"
+    },
+    "/_www/docs": {
+      "filePath": "_www/docs.tsx",
+      "parent": "/_www"
+    },
+    "/_www/pricing": {
+      "filePath": "_www/pricing.tsx",
+      "parent": "/_www"
     },
     "/dash/a": {
       "filePath": "dash/a.tsx",
