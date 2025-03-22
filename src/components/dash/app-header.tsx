@@ -26,7 +26,6 @@ export function AppHeader() {
     <Navbar
       classNames={{
         wrapper: '!max-w-none',
-        base: 'bg-transparent backdrop-saturate-0',
       }}
     >
       <NavbarBrand>
@@ -55,7 +54,7 @@ export function AppHeader() {
           </NavbarItem>
         </div>
 
-        <div className="flex">
+        <div>
           <ModeToggle />
           <NotificationPopover />
         </div>
